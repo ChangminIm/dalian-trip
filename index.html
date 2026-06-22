@@ -356,6 +356,8 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <button class="tbtn" id="toggleAll">모두 펼치기</button>
 </div>
 <div id="days"></div></div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>🍴 먹거리 총정리<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>날짜·지역별 추천 식당 한눈에 · 이름을 누르면 설명·사진, 📍지도/🗺Amap/📝후기</span></div>
+<div id="foodall" style="margin-top:8px"></div></div></section>
 <footer>2026 다롄 GIS 연구실 워크샵 · 모바일 보기용<br><span class="editnote">편집·체크 내용은 이 기기 브라우저에 저장돼요(지원 시)</span></footer>
 </div>
 <div class="detail" id="detail"><div class="dwrap">
@@ -495,7 +497,7 @@ const TOURP=[
  {n:"Klook",u:q=>"https://www.klook.com/en-US/search/?query="+encodeURIComponent(q)},
  {n:"마이리얼트립",u:(q,kq)=>"https://www.myrealtrip.com/search?q="+encodeURIComponent(kq||q)}];
 const gimgUrl=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
-const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9一-鿿]+/g,"-").replace(/^-+|-+$/g,"");
 // 장소 설명: m(지도검색어) 그대로 key. ko=한국어 설명, wk=위키백과 영문 제목(사진·추가설명)
 const PLACE_INFO={
 "Dalian Zhoushuizi International Airport":{wk:"Dalian Zhoushuizi International Airport",ko:"다롄 도심에서 가까운 국제공항. 택시(디디)는 '网约车(E-Hailing)' 표지판을 따라가야 하고, 일반 'Taxi' 승강장과 다르니 주의하세요."},
@@ -747,6 +749,18 @@ const PHRASES=[
 document.getElementById("phrases").innerHTML=PHRASES.map(g=>`<div class="phr-g">${g.g}</div>`+g.items.map(it=>`<div class="phrcard"><span class="phr-l">${esc(it[0])}</span><span class="phr-r"><span class="phr-pt">${esc(it[1])}</span><span class="phr-pr">${esc(it[2])}</span></span></div>`).join("")).join("");
 function showToast(m){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.classList.add("show");clearTimeout(window._tT);window._tT=setTimeout(function(){e.classList.remove("show");},1600);}
 function copyZh(btn,txt){function done(){var o=btn.textContent;btn.textContent="✓ 복사됨";showToast("복사됐어요: "+txt);setTimeout(function(){btn.textContent=o;},1500);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fb);}else{fb();}function fb(){try{var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.focus();ta.select();document.execCommand("copy");document.body.removeChild(ta);}catch(e){}done();}}
+const FOODAREA={"6/24":"성해광장 (Day 1)","6/25":"어인부두 · 서안로 (Day 2)","6/26":"동관가 · 동방수성 (Day 3)","6/27":"출발 전 · 성해광장/공항 (Day 4)"};
+function renderFoodAll(){
+ const el=document.getElementById("foodall");if(!el)return;
+ el.innerHTML=Object.keys(FOODS).map(date=>{
+  const cards=FOODS[date].map(f=>{
+   const amap=/[一-鿿]/.test(f.m)?`<a class="btn amap" target="_blank" rel="noopener" href="${amapUrl(f.m)}">🗺 Amap</a>`:"";
+   return `<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${esc(f.name)}</a></div><div class="fm">${esc(f.desc)}</div><div class="acts"><a class="btn map" target="_blank" rel="noopener" href="${mapUrl(f.m)}">📍 지도</a>${amap}${f.n?`<a class="btn rev" target="_blank" rel="noopener" href="${revUrl(f.n)}">📝 후기</a>`:""}</div></div>`;
+  }).join("");
+  return `<div class="phr-g">🍽 ${FOODAREA[date]||date}</div>${cards}`;
+ }).join("");
+}
+renderFoodAll();
 </script>
 </body>
 </html>
