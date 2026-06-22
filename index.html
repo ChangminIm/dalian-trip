@@ -305,6 +305,15 @@ body.dark .btn.amap{background:#14241a;border-color:#2a5135;color:#62cf86}
 body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1d2630;color:#fff;padding:11px 18px;border-radius:999px;font-size:13.5px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:90%;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.install{flex-direction:column;align-items:stretch}
+.install-main{display:flex;align-items:center;gap:8px}
+.install-main span{flex:1}
+.install-main button{margin-left:0;flex:none;white-space:nowrap}
+#installHelp{background:transparent!important;color:var(--azulejo)!important;border:1px solid var(--line)!important}
+.install-guide{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:9px;font-size:12px;line-height:1.75}
+.install.guideopen .install-guide{display:block}
+.install-guide .ig-g{margin-bottom:7px}
+.install-guide .ig-g>b{color:var(--azulejo);display:block;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -317,7 +326,7 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <div class="clocks" id="clocks"></div>
 </div></header>
 <div class="wrap">
-<div class="install" id="install"><span>📲 홈 화면에 추가하면 앱처럼 열리고 <b>오프라인</b>에서도 일정을 볼 수 있어요</span><button id="installBtn">설치</button></div>
+<div class="install" id="install"><div class="install-main"><span id="installMsg">📲 <b>홈 화면에 추가</b>하면 앱처럼 빠르게 열리고 오프라인에서도 일정을 봐요</span><button id="installBtn" style="display:none">설치</button><button id="installHelp">📖 방법</button></div><div class="install-guide" id="installGuide"></div></div>
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>날씨 · 환율<span class="sechev">▶</span></button><div class="sec-body">
 <div class="grid" id="weather"></div>
 <div class="conv">
@@ -329,7 +338,7 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <div id="phrases"></div></div></section>
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>항공권<span class="sechev">▶</span></button><div class="sec-body"><div class="grid" id="flights"></div></div></section>
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>숙소<span class="sechev">▶</span></button><div class="sec-body"><div class="grid" id="hotels"></div></div></section>
-<section class="sec open"><button class="sec-toggle"><span class="tick"></span>📍 택시·길찾기 중국어 메모<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>📋 복사로 중국어 주소를 붙여넣거나 기사에게 보여주세요 · 📍 지도로 위치 확인</span></div>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>📍 택시·길찾기 중국어 메모<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>📋 복사로 중국어 주소를 붙여넣거나 기사에게 보여주세요 · 📍 지도로 위치 확인</span></div>
 <div class="grid" id="fado" style="margin-top:8px"></div></div></section>
 <section class="sec"><button class="sec-toggle"><span class="tick"></span>✨ 더 가볼만한 다롄<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>고정 일정 외 추천 명소 · 시간 여유 있을 때 · 📋 복사 / 📍 구글 / 🗺 Amap</span></div>
 <div class="grid" id="spots" style="margin-top:8px"></div></div></section>
@@ -621,19 +630,17 @@ document.getElementById("printBtn").onclick=()=>window.print();
 
 /* ===== PWA: 설치 안내(안드로이드/아이폰) + 서비스워커 ===== */
 let deferredPrompt=null;
-const installBox=document.getElementById("install"),installBtn=document.getElementById("installBtn");
+const installBox=document.getElementById("install"),installBtn=document.getElementById("installBtn"),installHelp=document.getElementById("installHelp"),installGuide=document.getElementById("installGuide"),installMsg=document.getElementById("installMsg");
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
 const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-// 안드로이드/데스크톱 크롬: 자동 설치 프롬프트
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;if(!isStandalone)installBox.classList.add("show");});
+const shareSvg=`<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg>`;
+installGuide.innerHTML=`<div class="ig-g"><b>📱 갤럭시·안드로이드</b><div>• <b>Chrome</b>: 우측 상단 <b>⋮</b> → <b>'앱 설치'</b> 또는 <b>'홈 화면에 추가'</b></div><div>• <b>삼성 인터넷</b>: 하단 <b>≡</b> 메뉴 → <b>'현재 페이지 추가'</b> → <b>'홈 화면'</b></div></div><div class="ig-g"><b>🍎 아이폰</b><div>• Safari 하단 <b>공유</b> ${shareSvg} → <b>'홈 화면에 추가'</b></div></div>`;
+installHelp.onclick=()=>installBox.classList.toggle("guideopen");
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="";});
 installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBox.classList.remove("show");};
 window.addEventListener("appinstalled",()=>installBox.classList.remove("show"));
-// 아이폰 사파리: 프롬프트 미지원 → 공유 버튼 수동 안내
-if(isIos&&!isStandalone){
- installBtn.style.display="none";
- installBox.querySelector("span").innerHTML=`📲 <b>아이폰</b> 설치: 사파리 하단 <b>공유</b> <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg> 버튼 → <b>'홈 화면에 추가'</b> 를 누르면 앱처럼 열려요`;
- installBox.classList.add("show");
-}
+if(isIos){installMsg.innerHTML=`📲 <b>아이폰</b>: 사파리 하단 <b>공유</b> ${shareSvg} → <b>'홈 화면에 추가'</b>`;}
+if(!isStandalone)installBox.classList.add("show");
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 
 /* ===== 장소 상세 페이지 (해시 라우팅) ===== */
