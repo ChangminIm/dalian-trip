@@ -1,5 +1,5 @@
 // 다롄 워크샵 일정 · 오프라인 캐시
-const CACHE = "dl-trip-v1";
+const CACHE = "dl-trip-v2";
 const IMGCACHE = "dl-img-v1";
 const ASSETS = [
   "./",
