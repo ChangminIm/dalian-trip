@@ -1,0 +1,16 @@
+{
+  "name": "2026 다롄 GIS 워크샵",
+  "short_name": "다롄 워크샵",
+  "description": "2026.6.24–6.27 중국 다롄 GIS 연구실 워크샵 일정",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ko",
+  "background_color": "#FBFAF7",
+  "theme_color": "#16467F",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

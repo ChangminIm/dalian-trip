@@ -2,469 +2,766 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0f766e">
-<title>2026 GIS 연구실 워크샵 · 다롄</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 다롄 GIS 워크샵</title>
+<meta name="theme-color" content="#16467F">
+<meta name="description" content="2026.6.24–6.27 중국 다롄 GIS 연구실 워크샵 일정">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="다롄 워크샵">
 <style>
-  :root{
-    --bg:#f4f7f6; --card:#ffffff; --ink:#1c2826; --sub:#5b6b68;
-    --teal:#0f766e; --teal-soft:#e6f4f1; --line:#e4eae8;
-    --accent:#f59e0b; --accent-soft:#fff4e0;
-    --shadow:0 1px 3px rgba(0,0,0,.06),0 6px 18px rgba(0,0,0,.05);
-    --r:16px;
-  }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",Roboto,sans-serif;
-    line-height:1.6;font-size:16px;
-    padding:0 0 calc(40px + env(safe-area-inset-bottom));
-  }
-  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
-
-  /* HERO */
-  header.hero{
-    background:linear-gradient(160deg,#0f766e 0%,#115e59 60%,#134e4a 100%);
-    color:#fff;padding:calc(34px + env(safe-area-inset-top)) 16px 30px;
-    text-align:center;border-radius:0 0 26px 26px;box-shadow:var(--shadow);
-  }
-  .hero .eyebrow{font-size:13px;letter-spacing:.14em;opacity:.85;text-transform:uppercase;margin-bottom:6px}
-  .hero h1{margin:0;font-size:26px;font-weight:800;line-height:1.25}
-  .hero .meta{margin-top:12px;font-size:15px;opacity:.95}
-  .hero .pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-  .pill{background:rgba(255,255,255,.16);backdrop-filter:blur(4px);
-    padding:6px 13px;border-radius:999px;font-size:13px;font-weight:600}
-  .countdown{margin-top:18px;font-size:14px;background:rgba(0,0,0,.18);
-    display:inline-block;padding:8px 16px;border-radius:999px;font-weight:600}
-
-  /* NAV */
-  nav.tabs{position:sticky;top:0;z-index:20;background:rgba(244,247,246,.92);
-    backdrop-filter:blur(10px);padding:10px 0;margin-bottom:4px;
-    border-bottom:1px solid var(--line)}
-  nav.tabs .scroll{display:flex;gap:8px;overflow-x:auto;padding:0 16px;
-    scrollbar-width:none}
-  nav.tabs .scroll::-webkit-scrollbar{display:none}
-  nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--sub);
-    background:var(--card);border:1px solid var(--line);padding:7px 14px;
-    border-radius:999px;font-size:14px;font-weight:600;white-space:nowrap}
-  nav.tabs a:active{background:var(--teal-soft);color:var(--teal)}
-
-  section{margin-top:22px}
-  .sec-title{display:flex;align-items:center;gap:8px;font-size:19px;
-    font-weight:800;margin:0 0 12px;padding:0 2px}
-  .sec-title .dot{font-size:22px}
-
-  .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
-    border:1px solid var(--line);overflow:hidden}
-  .card + .card{margin-top:12px}
-
-  /* FLIGHT */
-  .flight{display:flex;align-items:center;gap:10px;padding:16px}
-  .flight .leg{flex:1;text-align:center}
-  .flight .code{font-size:13px;color:var(--sub);font-weight:600}
-  .flight .time{font-size:20px;font-weight:800;margin:2px 0}
-  .flight .place{font-size:13px;color:var(--sub)}
-  .flight .arrow{color:var(--teal);font-size:20px}
-  .flight .dep{font-size:12px;color:var(--accent);font-weight:700;margin-top:4px}
-
-  /* DAY (collapsible) */
-  details.day{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
-    border:1px solid var(--line);margin-top:12px;overflow:hidden}
-  details.day>summary{list-style:none;cursor:pointer;padding:16px;
-    display:flex;align-items:center;gap:12px}
-  details.day>summary::-webkit-details-marker{display:none}
-  .day .badge{flex:0 0 auto;width:48px;height:48px;border-radius:12px;
-    background:var(--teal-soft);color:var(--teal);display:flex;
-    flex-direction:column;align-items:center;justify-content:center;font-weight:800;line-height:1}
-  .day .badge .d{font-size:18px}
-  .day .badge .w{font-size:11px;margin-top:2px;font-weight:600}
-  .day .head-txt{flex:1;min-width:0}
-  .day .head-txt h3{margin:0;font-size:16px;font-weight:800}
-  .day .head-txt p{margin:2px 0 0;font-size:13px;color:var(--sub);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .day .chev{color:var(--sub);transition:transform .25s;flex:0 0 auto}
-  details.day[open] .chev{transform:rotate(90deg)}
-
-  .timeline{padding:4px 16px 18px;border-top:1px solid var(--line)}
-  .tl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
-  .tl-item:last-child{border-bottom:none}
-  .tl-time{flex:0 0 64px;font-size:13px;font-weight:700;color:var(--teal);padding-top:1px}
-  .tl-body{flex:1;min-width:0}
-  .tl-body .t{font-weight:700;font-size:15px}
-  .tl-body .d{font-size:13.5px;color:var(--sub);margin-top:3px}
-  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;
-    border-radius:6px;margin-right:5px;vertical-align:middle}
-  .tag.move{background:#eef2ff;color:#4f46e5}
-  .tag.eat{background:var(--accent-soft);color:#b45309}
-  .tag.see{background:var(--teal-soft);color:var(--teal)}
-
-  /* COPY LIST */
-  .copy-row{display:flex;align-items:center;gap:10px;padding:13px 16px;border-top:1px solid var(--line)}
-  .copy-row:first-child{border-top:none}
-  .copy-row .info{flex:1;min-width:0}
-  .copy-row .ko{font-size:14px;font-weight:700}
-  .copy-row .zh{font-size:14px;color:var(--sub);margin-top:1px;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .copy-btn{flex:0 0 auto;background:var(--teal-soft);color:var(--teal);
-    border:none;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:700;
-    cursor:pointer;font-family:inherit}
-  .copy-btn:active{background:var(--teal);color:#fff}
-  .copy-btn.done{background:#16a34a;color:#fff}
-
-  /* GENERIC LIST CARD */
-  .list{padding:6px 0}
-  .list .li{display:flex;gap:12px;padding:11px 16px;align-items:flex-start;border-top:1px solid var(--line)}
-  .list .li:first-child{border-top:none}
-  .list .li .ic{flex:0 0 26px;font-size:18px;text-align:center}
-  .list .li .tx{flex:1;font-size:14.5px}
-  .list .li .tx b{font-weight:700}
-  .list .li .tx small{display:block;color:var(--sub);font-size:13px;margin-top:1px}
-
-  /* CHECKLIST */
-  .check label{display:flex;gap:12px;padding:12px 16px;align-items:center;
-    border-top:1px solid var(--line);cursor:pointer;font-size:15px}
-  .check label:first-child{border-top:none}
-  .check input{appearance:none;width:22px;height:22px;border:2px solid var(--line);
-    border-radius:7px;flex:0 0 auto;display:grid;place-content:center;transition:.15s}
-  .check input:checked{background:var(--teal);border-color:var(--teal)}
-  .check input:checked::after{content:"✓";color:#fff;font-size:14px;font-weight:900}
-  .check input:checked + span{color:var(--sub);text-decoration:line-through}
-
-  .note{font-size:13px;color:var(--sub);padding:12px 16px;background:var(--accent-soft);
-    border-top:1px solid var(--line)}
-  a.btn{display:block;text-align:center;text-decoration:none;background:var(--teal);
-    color:#fff;font-weight:700;padding:14px;font-size:15px}
-  a.btn:active{background:#0c5e57}
-  a.inline{color:var(--teal);font-weight:600;text-decoration:none;word-break:break-all}
-
-  footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:34px;padding:0 16px}
-  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));
-    transform:translateX(-50%) translateY(20px);background:#1c2826;color:#fff;
-    padding:11px 20px;border-radius:999px;font-size:14px;font-weight:600;
-    opacity:0;pointer-events:none;transition:.25s;z-index:50}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareR.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareB.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareEB.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+:root{--ink:#1d2630;--muted:#6b7682;--paper:#FBFAF7;--azulejo:#16467F;--azulejo-2:#1E5DA8;
+--tint:#E9F0FA;--terra:#C8532B;--port:#8A2433;--gold:#B07A1E;--line:#E6E1D6;--star:#E0A92E;--card:#fff}
+body.dark{--ink:#e7eaee;--muted:#94a0ab;--paper:#13171c;--card:#1b2026;--tint:#1d2a3a;--line:#2b333d}
+body.dark .btn.map{background:#16202c;border-color:#284057}
+body.dark .btn.rev{background:#241f15}
+body.dark .btn.book{background:#2a1b1f}
+body.dark .conv input{background:#11151a}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'NanumSquare',system-ui,'Apple SD Gothic Neo',sans-serif;color:var(--ink);background:var(--paper);line-height:1.5;padding-bottom:60px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:var(--azulejo);color:#fff;padding:26px 0 22px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;opacity:.10;background-image:radial-gradient(circle at 12px 12px,#fff 2px,transparent 2.5px),radial-gradient(circle at 0 0,transparent 11px,#fff 11px,#fff 12px,transparent 12px);background-size:24px 24px}
+.hero .wrap{position:relative}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#bcd4f0;font-weight:800}
+.hero h1{font-family:'NanumSquare',sans-serif;font-weight:800;font-size:34px;line-height:1.1;margin:6px 0 6px}
+.who{font-family:'NanumSquare',sans-serif;font-weight:800;font-size:18px;color:#fff;margin:0 0 11px}
+.who span{color:var(--star);font-size:16px;margin:0 4px;display:inline-block;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}}
+.hero .meta{font-size:13.5px;color:#dce8f7;display:flex;flex-wrap:wrap;gap:6px 14px}
+.hero .meta b{color:#fff;font-weight:800}
+section{margin-top:22px}
+.h-label{font-family:'NanumSquare',sans-serif;font-size:19px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.h-label .tick{width:18px;height:3px;background:var(--terra);border-radius:2px;display:inline-block}
+.grid{display:grid;gap:8px}
+.info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px}
+.info .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.info .route{font-weight:800}.info .when{color:var(--muted);font-size:12px;white-space:nowrap}
+.info .sub{color:var(--muted);font-size:12.5px;margin-top:3px}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
+.pill.ok{background:#E7F2EA;color:#2C7A45}.pill.todo{background:#FBE9E7;color:#B5402C}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:4px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+.day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit}
+.date-badge{flex:none;width:52px;text-align:center}
+.date-badge .d{font-family:'NanumSquare',sans-serif;font-size:21px;font-weight:800;line-height:1;color:var(--azulejo)}
+.date-badge .w{font-size:11px;color:var(--muted);margin-top:3px}
+.day-head .title{flex:1;min-width:0}
+.day-head .title .t{font-weight:800;font-size:15px}
+.day-head .title .wake{font-size:12px;color:var(--terra);font-weight:600;margin-top:2px}
+.chev{flex:none;color:var(--muted);transition:transform .25s;font-size:13px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;border-top:1px solid var(--line);padding:6px 16px 14px}
+.day.open .day-body{display:block}
+.it{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.it:last-child{border-bottom:0}
+.it .time{flex:none;width:54px;font-size:12px;font-weight:600;color:var(--azulejo-2);padding-top:1px;font-variant-numeric:tabular-nums}
+.it .body{flex:1;min-width:0}
+.it .name{font-weight:800;font-size:14.5px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.it.res .name{color:var(--port)}
+.stars{font-size:12px;letter-spacing:1px;color:var(--star);margin-top:2px}
+.stars .se{color:#dcd6c8}
+.tag{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;line-height:1.6}
+.tag.res{background:#F6E4E6;color:var(--port)}.tag.liq{background:#F6EED7;color:var(--gold)}
+.tag.must{background:#FBEFD8;color:#9a6a12}
+.it .desc{font-size:13px;color:#384450;margin-top:3px}
+.it .tip{font-size:12px;color:var(--muted);margin-top:3px}.it .tip.warn{color:#B5402C}
+.acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;align-items:center}
+.btn{font-size:12px;font-weight:600;text-decoration:none;padding:5px 11px;border-radius:9px;border:1px solid var(--line);color:var(--azulejo);background:var(--card);display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+.btn.map{border-color:#cfe0f3;background:#F2F7FD}
+.btn.rev{border-color:#e3d9c4;background:#FBF7EE;color:var(--gold)}
+.btn.book{border-color:#e7c7cb;background:#FBEEF0;color:var(--port)}
+.btn:active{transform:scale(.97)}
+.rm{display:none;margin-left:auto;border:0;background:none;color:#c0392b;font-size:13px;cursor:pointer;padding:4px 8px;font-weight:700}
+body.edit .rm{display:inline-flex}
+.add-row{display:none;margin-top:10px}
+body.edit .add-row{display:block}
+.add-btn{width:100%;border:1px dashed #b9c6d6;background:#F4F8FD;color:var(--azulejo-2);border-radius:10px;padding:9px;font-weight:600;font-size:13px;cursor:pointer}
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.fcard .fn{font-weight:800;font-size:14px}.fcard .fm{font-size:12.5px;color:var(--muted);margin:3px 0 8px}
+.sec-toggle{width:100%;background:none;border:0;cursor:pointer;font:inherit;color:inherit;display:flex;align-items:center;gap:8px;font-family:'NanumSquare',sans-serif;font-size:19px;font-weight:800;margin-bottom:0}
+.sec-toggle .tick{width:18px;height:3px;background:var(--terra);border-radius:2px;display:inline-block}
+.sec .sechev{margin-left:auto;color:var(--muted);font-size:13px;transition:transform .25s}
+.sec.open .sechev{transform:rotate(90deg)}
+.sec-body{display:none;margin-top:10px}
+.sec.open .sec-body{display:block}
+.rdate{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--azulejo);border-radius:6px;padding:1px 7px;margin-right:6px;font-variant-numeric:tabular-nums}
+.tools{display:flex;justify-content:flex-end;gap:8px;align-items:center;margin:2px 0 12px;flex-wrap:wrap}
+.tools .lbl{margin-right:auto;font-size:12px;color:var(--muted)}
+.tbtn{font-size:12.5px;font-weight:600;color:var(--azulejo);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:6px 12px;cursor:pointer}
+.tbtn.on{background:var(--azulejo);color:#fff;border-color:var(--azulejo)}
+.reset{display:none;color:#c0392b;border-color:#e6c4c0}
+body.edit .reset{display:inline-block}
+footer{margin-top:26px;font-size:12px;color:var(--muted);text-align:center;line-height:1.7}
+/* 상단 컨트롤(다크/인쇄) */
+.topbar{position:absolute;top:12px;right:14px;display:flex;gap:6px;z-index:5}
+.iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.14);color:#fff;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.iconbtn:active{transform:scale(.94)}
+/* D-Day 배지 */
+.dday{display:inline-block;margin-left:8px;background:var(--star);color:#3a2a00;font-weight:800;letter-spacing:0;padding:1px 9px;border-radius:999px;text-transform:none;font-size:11.5px;vertical-align:middle}
+/* 시계 */
+.clocks{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+.clock{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:7px 12px;font-size:11.5px;color:#cfe0f3;min-width:118px}
+.clock b{display:block;color:#fff;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:1px;letter-spacing:.5px}
+.clock .cd{font-size:11px;color:#bcd4f0}
+/* 날씨·환율 */
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+.wcard .wc{font-weight:700;font-size:13.5px}
+.wcard .wt{color:var(--muted);font-size:12.5px;margin-top:3px}
+.wcard .wt b{color:var(--terra);font-weight:700}
+.wxrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.wxchip{font-size:11px;font-weight:600;background:var(--tint);border-radius:7px;padding:3px 8px;white-space:nowrap}
+.wxchip b{font-weight:800;color:var(--terra)}
+.wxsoon{font-size:11px;color:var(--muted);margin-top:7px}
+.conv{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px}
+.conv .cv-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.conv input{font:inherit;font-size:15px;font-weight:800;border:1px solid var(--line);border-radius:9px;padding:7px 10px;width:108px;background:var(--paper);color:var(--ink);text-align:right}
+.conv .eq{font-weight:800;color:var(--azulejo-2);font-size:15px}
+.conv .won{font-weight:800;font-size:17px;color:var(--ink);font-variant-numeric:tabular-nums}
+.conv .rate{font-size:11.5px;color:var(--muted);margin-top:9px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.conv .rate input{width:80px;font-size:12.5px;padding:4px 7px;font-weight:700}
+/* 장소명 탭 힌트 */
+.pname{color:inherit;text-decoration:none;border-bottom:1.5px dotted currentColor;cursor:pointer}
+.pname::after{content:" ›";opacity:.5;font-weight:800}
+/* 근처 먹거리 */
+.foodwrap{margin-top:12px;background:#FFF8F0;border:1px solid var(--line);border-radius:12px;padding:9px 13px}
+body.dark .foodwrap{background:#221b13;border-color:#3a2f22}
+.foodhead{font-weight:800;font-size:12.5px;color:var(--terra);margin-bottom:3px}
+.foodhead b{background:var(--terra);color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;margin-left:3px}
+.foodcard{display:block;text-decoration:none;color:inherit;padding:7px 0;border-bottom:1px dashed var(--line)}
+.foodcard:last-child{border-bottom:0}
+.foodcard .fcn{font-weight:800;font-size:13px}
+.foodcard .fcn::after{content:" ›";opacity:.45}
+.foodcard .fcd{display:block;font-size:11.5px;color:var(--muted);margin-top:1px;line-height:1.45}
+/* 추천 1일 투어 */
+.tourwrap{margin-top:10px;background:#F1F6FC;border:1px solid var(--line);border-radius:12px;padding:10px 13px}
+body.dark .tourwrap{background:#141d28;border-color:#28384c}
+.tourhead{font-weight:800;font-size:12.5px;color:var(--azulejo-2);margin-bottom:6px}
+.tourhead b{background:var(--azulejo-2);color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;margin-left:3px}
+.tourcard{padding:9px 0;border-bottom:1px dashed var(--line)}
+.tourcard:last-of-type{border-bottom:0}
+.tctop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.tcn{font-weight:800;font-size:13px;flex:1}
+.tcp{flex:none;font-size:11.5px;font-weight:800;color:var(--terra);white-space:nowrap}
+.tcrec{font-size:11.5px;margin:5px 0 6px;line-height:1.5;color:var(--ink)}
+.tcrec b{display:inline-block;font-weight:800;font-size:10.5px;color:#fff;padding:1px 7px;border-radius:999px;margin-right:6px}
+.tcrec.s b{background:#C8532B}
+.tcrec.g b{background:#2C7A45}
+.tcrec.o b{background:#8a93a0}
+.tcrec.d b{background:#1E5DA8}
+.tcd{font-size:11.5px;color:var(--muted);margin:3px 0 7px;line-height:1.45}
+.tchips{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{font-size:11px;font-weight:700;text-decoration:none;color:var(--azulejo);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:4px 8px}
+.tchip:active{transform:scale(.97)}
+.tournote{font-size:11px;color:var(--muted);margin-top:9px;line-height:1.5}
+/* 장소 상세 페이지 */
+.detail{position:fixed;inset:0;z-index:50;background:var(--paper);overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);transition:transform .26s ease;visibility:hidden;-webkit-overflow-scrolling:touch}
+.detail.open{transform:none;visibility:visible}
+.dwrap{max-width:680px;margin:0 auto;padding-bottom:40px}
+.dback{position:sticky;top:0;z-index:2;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);color:var(--azulejo);font:inherit;font-weight:800;font-size:14px;padding:13px 16px;cursor:pointer}
+.dphoto{position:relative;width:100%;aspect-ratio:16/10;background:var(--azulejo);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.dphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.dphoto .ph{font-size:60px;opacity:.9}
+.dphoto .phpat{position:absolute;inset:0;opacity:.12;background-image:radial-gradient(circle at 12px 12px,#fff 2px,transparent 2.5px);background-size:24px 24px}
+.dphoto .credit{position:absolute;right:8px;bottom:6px;font-size:9.5px;color:#fff;background:rgba(0,0,0,.4);padding:1px 6px;border-radius:6px;text-decoration:none}
+.dphoto .gimg{position:absolute;right:10px;bottom:10px;font-size:12px;font-weight:800;color:#fff;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.4);padding:6px 11px;border-radius:9px;text-decoration:none}
+.dspin{width:26px;height:26px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dcontent{padding:16px}
+.dcat{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--terra);text-transform:none}
+.dtitle{font-family:'NanumSquare',sans-serif;font-weight:800;font-size:23px;line-height:1.2;margin:5px 0 6px}
+.dstars{color:var(--star);font-size:14px;letter-spacing:1px;margin-bottom:10px}
+.dstars .se{color:var(--line)}
+.ddesc{font-size:14.5px;line-height:1.7;color:var(--ink)}
+.dstory{margin-top:13px;font-size:13.5px;line-height:1.7;background:#FBF6EC;border:1px solid #E8D9B5;border-radius:12px;padding:12px 14px;color:var(--ink)}
+body.dark .dstory{background:#221d12;border-color:#3e3320}
+.dstory b{display:inline-block;color:var(--gold);font-weight:800;font-size:12.5px;margin-bottom:3px}
+.dtip{margin-top:12px;font-size:13px;line-height:1.6;color:var(--ink);background:var(--tint);border-radius:12px;padding:11px 13px}
+.dtip.warn{background:#FBE9E7;color:#9a3420}
+.dtip b{font-weight:800}
+.dwiki{margin-top:14px;font-size:13px;line-height:1.65;color:var(--muted);border-left:3px solid var(--line);padding:2px 0 2px 11px}
+.dwiki .src{display:block;font-size:11px;font-weight:800;color:var(--azulejo-2);margin-top:5px;text-decoration:none}
+.dacts{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.dacts .btn{font-size:13.5px;padding:9px 14px}
+/* 준비물 */
+.pack-g{margin-bottom:6px}
+.pack-g .pg{font-weight:800;font-size:13.5px;margin:12px 0 4px;color:var(--azulejo)}
+.pack-g .pg:first-child{margin-top:2px}
+.pitem{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.pitem:last-child{border-bottom:0}
+.pitem.on .pt{color:var(--muted);text-decoration:line-through}
+.pitem .pt{font-size:13.5px;flex:1}
+.pitem .pt small{color:var(--muted);font-size:11.5px;font-weight:400}
+/* 예상 비용 */
+.cost{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 14px}
+.cost .crow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.cost .crow:last-child{border-bottom:0}
+.cost .cl{font-size:13.5px;font-weight:800;line-height:1.35}
+.cost .cl small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;margin-top:2px}
+.cost .cv{text-align:right;white-space:nowrap;flex:none}
+.cost .cv .e{font-size:14px;font-weight:800;color:var(--azulejo-2)}
+.cost .cv .w{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cost-sum{background:var(--azulejo);color:#fff;border-radius:14px;padding:13px 16px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.cost-sum .st{font-size:11.5px;color:#cfe0f3;line-height:1.7}
+.cost-sum .sv{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums}
+.cost-sum .sv small{font-size:12px;font-weight:400;color:#cfe0f3}
+.cost-note{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.65}
+/* 경비 가계부 */
+.expform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px}
+.ef-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.ef-row:last-child{margin-bottom:0}
+.expform input,.expform select{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:var(--paper);color:var(--ink);min-width:0}
+#expAmt{width:108px;flex:none;font-weight:800;text-align:right}
+#expCat,#expMemo{flex:1}
+.seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;flex:1}
+.seg button{flex:1;font:inherit;font-size:12.5px;font-weight:700;border:0;background:var(--paper);color:var(--muted);padding:8px 4px;cursor:pointer}
+.seg button.on{background:var(--azulejo);color:#fff}
+.ef-add{flex:none;font:inherit;font-size:13.5px;font-weight:800;background:var(--terra);color:#fff;border:0;border-radius:9px;padding:8px 14px;cursor:pointer}
+.exprow{display:flex;align-items:center;gap:9px;padding:9px 2px;border-bottom:1px dashed var(--line);font-size:13px}
+.exprow:last-child{border-bottom:0}
+.exprow .ex-c{flex:none;font-size:17px}
+.exprow .ex-b{flex:1;min-width:0}
+.exprow .ex-m{font-weight:700}
+.exprow .ex-meta{font-size:11px;color:var(--muted)}
+.exprow .ex-a{flex:none;font-weight:800;font-variant-numeric:tabular-nums}
+.exprow .ex-del{flex:none;border:0;background:none;color:#c0392b;font-size:15px;cursor:pointer;padding:2px 4px}
+.exp-sum{background:var(--azulejo);color:#fff;border-radius:14px;padding:13px 16px;font-size:12.5px;line-height:1.7;margin-bottom:10px}
+.exp-sum .es-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+.exp-sum .es-tot{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.exp-sum .es-sub{color:#cfe0f3;font-size:11.5px}
+.exp-sum .es-bar{height:7px;background:rgba(255,255,255,.25);border-radius:999px;margin:9px 0 7px;overflow:hidden}
+.exp-sum .es-fill{height:100%;background:var(--star);border-radius:999px;max-width:100%}
+.exp-sum .es-set{color:#dce8f7;border-top:1px solid rgba(255,255,255,.2);padding-top:7px;margin-top:2px}
+.exp-sum .es-set b{color:var(--star);font-weight:800}
+.exp-empty{font-size:12.5px;color:var(--muted);text-align:center;padding:14px 0}
+/* 회화·메뉴 */
+.phrnote{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+.phrnote b{color:var(--ink)}
+.phr-g{font-weight:800;font-size:13.5px;color:var(--azulejo);margin:13px 0 6px}
+.phr-g:first-child{margin-top:0}
+.phrcard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.phr-l{flex:none;font-size:12.5px;color:var(--muted);max-width:42%}
+.phr-r{flex:1;text-align:right}
+.phr-pt{font-weight:800;font-size:14px}
+.phr-pr{display:block;font-size:11.5px;color:var(--terra);margin-top:1px}
+/* 오늘 강조 */
+.day.today{border-color:var(--terra);box-shadow:0 0 0 2px rgba(200,83,43,.18)}
+.day.today .date-badge .d{color:var(--terra)}
+.todaytag{font-size:10px;font-weight:800;color:#fff;background:var(--terra);border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+/* 하루 동선 버튼 */
+.dayroute{margin:10px 0 2px;background:#F3EFFA;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+body.dark .dayroute{background:#1f1b2b}
+.drhead{font-size:12.5px;font-weight:700;color:#5b3ea8;margin-bottom:8px}
+body.dark .drhead{color:#b8a5e0}
+.drhead b{font-weight:800}
+.drmodes{display:flex;gap:7px;flex-wrap:wrap}
+.drmode{font-size:12px;font-weight:700;text-decoration:none;color:var(--azulejo);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+.drmode.on{background:#5b3ea8;color:#fff;border-color:#5b3ea8}
+.drmode:active{transform:scale(.97)}
+.drlegs{margin-top:10px;border-top:1px dashed var(--line);padding-top:9px}
+.drleg{display:flex;gap:8px;font-size:12px;padding:3px 0;color:var(--ink);line-height:1.5}
+.drleg .dlm{flex:none;width:20px;text-align:center}
+.drlegnote{font-size:11px;color:var(--muted);margin-top:7px}
+/* 예약 진행률 + 체크 */
+.prog{margin:2px 0 12px}
+.prog .bar{height:9px;background:var(--line);border-radius:999px;overflow:hidden}
+.prog .fill{height:100%;background:linear-gradient(90deg,var(--azulejo-2),var(--star));border-radius:999px;transition:width .35s}
+.prog .lbl{font-size:12.5px;color:var(--muted);margin-top:6px;font-weight:700}
+.fcard .fhead{display:flex;align-items:flex-start;gap:9px}
+.fcard .fhead .fn{flex:1}
+.chk{flex:none;width:23px;height:23px;border-radius:7px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:14px;color:transparent;padding:0;margin-top:1px}
+.chk.on{background:#2C7A45;border-color:#2C7A45;color:#fff}
+.fcard.done{opacity:.55}
+/* 설치 안내 배너 */
+.install{display:none;align-items:center;gap:10px;background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:14px;font-size:12.5px;color:var(--ink)}
+.install.show{display:flex}
+.install button{margin-left:auto;flex:none;white-space:nowrap;font:inherit;font-size:12.5px;font-weight:700;background:var(--azulejo);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+@media(max-width:380px){.hero h1{font-size:29px}.it .time{width:46px}.clock{min-width:108px}}
+@media print{
+ .topbar,.tools,.add-row,.rm,.clocks,.sechev,.chev,.install,.dayroute,.editnote,.detail{display:none!important}
+ .day-body,.sec-body{display:block!important}
+ .day,.info,.fcard,.wcard,.conv{break-inside:avoid;box-shadow:none!important}
+ .hero,body.dark .hero{background:#fff}
+ .hero .eyebrow,.hero h1,.hero .meta,.hero .meta b{color:#000}
+ .hero::after{display:none}
+ body,body.dark{background:#fff;padding:0;--ink:#000;--card:#fff}
+}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="eyebrow">2026 GIS 연구실 워크샵</div>
-  <h1>🌊 중국 다롄 워크샵</h1>
-  <div class="meta">2026. 6. 24 (수) ~ 6. 27 (토) · 3박 4일</div>
-  <div class="pills">
-    <span class="pill">🏨 싱하이광장 아투어 호텔</span>
-    <span class="pill">✈️ CZ686 / CZ695</span>
-  </div>
-  <div class="countdown" id="countdown">D-day 계산 중…</div>
-</header>
-
-<nav class="tabs">
-  <div class="scroll">
-    <a href="#flight">✈️ 항공</a>
-    <a href="#days">📅 일정</a>
-    <a href="#hotel">🏨 숙소</a>
-    <a href="#arrival">📝 입국신고</a>
-    <a href="#apps">📱 앱</a>
-    <a href="#places">📍 장소명</a>
-    <a href="#pack">🧳 준비물</a>
-  </div>
-</nav>
-
+<header class="hero"><div class="wrap">
+<div class="topbar"><button class="iconbtn" id="darkBtn" title="다크모드" aria-label="다크모드">🌙</button><button class="iconbtn" id="printBtn" title="인쇄/PDF 저장" aria-label="인쇄">🖨</button></div>
+<div class="eyebrow">Dalian · 4 Days <span class="dday" id="dday"></span></div>
+<h1>2026 다롄 GIS 워크샵</h1>
+<div class="who">GIS 연구실 <span>🌊</span> 워크샵</div>
+<div class="meta"><span><b>2026.6.24(수) → 6.27(토)</b></span><span>중국 다롄 · 3박 4일</span><span>싱하이광장 아투어 호텔</span></div>
+<div class="clocks" id="clocks"></div>
+</div></header>
 <div class="wrap">
-
-  <!-- FLIGHT -->
-  <section id="flight">
-    <h2 class="sec-title"><span class="dot">✈️</span>항공편</h2>
-    <div class="card">
-      <div class="flight">
-        <div class="leg">
-          <div class="code">인천 ICN</div>
-          <div class="time">11:25</div>
-          <div class="place">6/24 출발</div>
-        </div>
-        <div class="arrow">→</div>
-        <div class="leg">
-          <div class="code">CZ686</div>
-          <div class="dep">가는 편</div>
-        </div>
-        <div class="arrow">→</div>
-        <div class="leg">
-          <div class="code">다롄 DLC</div>
-          <div class="time">11:40</div>
-          <div class="place">현지 도착</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="flight">
-        <div class="leg">
-          <div class="code">다롄 DLC</div>
-          <div class="time">14:00</div>
-          <div class="place">6/27 출발</div>
-        </div>
-        <div class="arrow">→</div>
-        <div class="leg">
-          <div class="code">CZ695</div>
-          <div class="dep">오는 편</div>
-        </div>
-        <div class="arrow">→</div>
-        <div class="leg">
-          <div class="code">인천 ICN</div>
-          <div class="time">16:15</div>
-          <div class="place">한국 도착</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DAYS -->
-  <section id="days">
-    <h2 class="sec-title"><span class="dot">📅</span>일자별 일정</h2>
-
-    <!-- DAY 1 -->
-    <details class="day" open>
-      <summary>
-        <div class="badge"><span class="d">24</span><span class="w">수</span></div>
-        <div class="head-txt"><h3>입국 · 연화산 케이블카</h3><p>공항 → 호텔 → 연화산 전망대 → 야경</p></div>
-        <div class="chev">›</div>
-      </summary>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-time">11:40</div><div class="tl-body"><div class="t">도착 · 입국수속</div><div class="d">입국수속 + 짐찾기 약 1시간 소요 가정</div></div></div>
-        <div class="tl-item"><div class="tl-time">12:40</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>공항 → 호텔</div><div class="d">DiDi 택시 약 34분. <b>E-Hailing(网约车)</b> 표지판 따라 이동 — 일반 Taxi 아님 주의!</div></div></div>
-        <div class="tl-item"><div class="tl-time">13:30</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>짐 풀기 · 점심</div><div class="d">성해광장 근처에서 점심식사</div></div></div>
-        <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>연화산 전망대 케이블카</div><div class="d">DiDi로 다롄삼림동물원(10분) → 동물원 관람 X, 케이블카 승강장으로. 케이블카 편도 60元 + 전망대 타워 20元. 다롄 시내 조망 (~19:30)</div></div></div>
-        <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>성해광장 저녁</div><div class="d">성해광장으로 돌아와 저녁식사</div></div></div>
-        <div class="tl-item"><div class="tl-time">20:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>싱하이광장 야경 → 호텔 복귀</div></div></div>
-      </div>
-    </details>
-
-    <!-- DAY 2 -->
-    <details class="day">
-      <summary>
-        <div class="badge"><span class="d">25</span><span class="w">목</span></div>
-        <div class="head-txt"><h3>어인부두 · 서안로 야시장</h3><p>유럽풍 부두 → 야시장 먹거리</p></div>
-        <div class="chev">›</div>
-      </summary>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>아침식사 후 출발</div></div></div>
-        <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>호텔 → 어인부두</div><div class="d">DiDi 택시 약 23분</div></div></div>
-        <div class="tl-item"><div class="tl-time">10:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>어인부두 (渔人码头)</div><div class="d">부두를 따라 유럽풍 건축물·레스토랑·카페가 늘어선 거리</div></div></div>
-        <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>점심식사</div><div class="d">어인부두 인근</div></div></div>
-        <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>어인부두 관광 이어서</div></div></div>
-        <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>어인부두 → 서안로 야시장</div><div class="d">DiDi 택시 약 35분 (长兴里小吃街西安路夜市)</div></div></div>
-        <div class="tl-item"><div class="tl-time">18:30</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>서안로 야시장</div><div class="d">야시장 구경 및 자유롭게 저녁식사</div></div></div>
-      </div>
-    </details>
-
-    <!-- DAY 3 -->
-    <details class="day">
-      <summary>
-        <div class="badge"><span class="d">26</span><span class="w">금</span></div>
-        <div class="head-txt"><h3>동관가 · 동방수성</h3><p>역사문화거리 → 수상도시</p></div>
-        <div class="chev">›</div>
-      </summary>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>아침식사 후 출발</div></div></div>
-        <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>호텔 → 동관가</div><div class="d">DiDi 택시 약 19분 (东关街历史文化街区)</div></div></div>
-        <div class="tl-item"><div class="tl-time">10:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>동관가 · 점심</div><div class="d">최근 정비된 역사문화거리, '대련의 성수동'. 상점·카페·기념품·포토존. 파빌리온 몰에서 쇼핑/점심 가능</div></div></div>
-        <div class="tl-item"><div class="tl-time">14:00</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>동방수성으로</div><div class="d">201번 전철 → 중국우정(中国邮政) 하차 후 1km(20분) 도보, 또는 민주광장(民主广场) 하차 후 13번 버스/택시</div></div></div>
-        <div class="tl-item"><div class="tl-time">15:30</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>동방수성 (东方水城)</div><div class="d">관람 및 저녁식사. 인근 갤러리아 백화점에서도 식사 가능</div></div></div>
-      </div>
-    </details>
-
-    <!-- DAY 4 -->
-    <details class="day">
-      <summary>
-        <div class="badge"><span class="d">27</span><span class="w">토</span></div>
-        <div class="head-txt"><h3>귀국</h3><p>산책·카페 → 공항 → 출국</p></div>
-        <div class="chev">›</div>
-      </summary>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-time">~11:00</div><div class="tl-body"><div class="t"><span class="tag see">관광</span>산책 · 카페 방문</div></div></div>
-        <div class="tl-item"><div class="tl-time">11:00</div><div class="tl-body"><div class="t"><span class="tag move">이동</span>호텔 → 공항</div><div class="d">DiDi 택시 약 19분 (大连周水子国际机场)</div></div></div>
-        <div class="tl-item"><div class="tl-time">11:00</div><div class="tl-body"><div class="t"><span class="tag eat">식사</span>공항 점심 → 탑승</div><div class="d">14:00 CZ695 출발</div></div></div>
-      </div>
-    </details>
-  </section>
-
-  <!-- HOTEL -->
-  <section id="hotel">
-    <h2 class="sec-title"><span class="dot">🏨</span>숙소</h2>
-    <div class="card">
-      <div class="copy-row">
-        <div class="info">
-          <div class="ko">다롄 싱하이광장 아투어 호텔</div>
-          <div class="zh">大连星海广场博物馆亚朵酒店</div>
-        </div>
-        <button class="copy-btn" data-copy="大连星海广场博物馆亚朵酒店">복사</button>
-      </div>
-      <div class="copy-row">
-        <div class="info">
-          <div class="ko">호텔 주소</div>
-          <div class="zh">大连市沙河口区星河路29号</div>
-        </div>
-        <button class="copy-btn" data-copy="大连市沙河口区星河路29号">복사</button>
-      </div>
-      <div class="copy-row">
-        <div class="info">
-          <div class="ko">호텔 전화</div>
-          <div class="zh">0411-82193333</div>
-        </div>
-        <a class="copy-btn" href="tel:041182193333" style="text-decoration:none">전화</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ARRIVAL -->
-  <section id="arrival">
-    <h2 class="sec-title"><span class="dot">📝</span>입국신고 (필수)</h2>
-    <div class="card">
-      <div class="note" style="background:var(--teal-soft);color:var(--teal)">
-        2025.11.20부터 시행 · 작성 완료 후 <b>QR코드 캡쳐/저장</b> 필수
-      </div>
-      <div class="list">
-        <div class="li"><div class="ic">🛂</div><div class="tx"><b>여권</b> 필요</div></div>
-        <div class="li"><div class="ic">🏨</div><div class="tx">호텔 주소 <small>大连市沙河口区星河路29号 / ☎ 0411-82193333</small></div></div>
-        <div class="li"><div class="ic">✈️</div><div class="tx">항공편 <small>CZ686 (인천→다롄) / CZ695 (다롄→인천)</small></div></div>
-      </div>
-      <a class="btn" href="https://s.nia.gov.cn/ArrivalCardFillingPC/" target="_blank" rel="noopener">입국신고 작성하러 가기 →</a>
-    </div>
-  </section>
-
-  <!-- APPS -->
-  <section id="apps">
-    <h2 class="sec-title"><span class="dot">📱</span>필수 앱</h2>
-    <div class="card"><div class="list">
-      <div class="li"><div class="ic">💳</div><div class="tx"><b>Alipay</b> (결제)<small>카드 등록 후 사용</small></div></div>
-      <div class="li"><div class="ic">💬</div><div class="tx"><b>WeChat</b> (결제/메신저)<small>알리페이 안 될 때. [나]>[결제 및 서비스]>[지갑]에서 카드 등록</small></div></div>
-      <div class="li"><div class="ic">🗺️</div><div class="tx"><b>Amap (가오더)</b> 지도<small>로그인 불필요. 안 되면 브라우저로 m.amap.com 접속</small></div></div>
-      <div class="li"><div class="ic">🗺️</div><div class="tx"><b>Baidu Map</b><small>Amap이 안 될 경우 사용</small></div></div>
-      <div class="li"><div class="ic">🌐</div><div class="tx"><b>파파고</b> (번역)</div></div>
-      <div class="li"><div class="ic">🚕</div><div class="tx"><b>DiDi China</b> (택시)<small>DiDi Rider 아님 주의! GPS 부정확하니 Pick up site 확인 필요</small></div></div>
-      <div class="li"><div class="ic">🛵</div><div class="tx"><b>Meituan</b> (배달)</div></div>
-    </div></div>
-  </section>
-
-  <!-- PLACES -->
-  <section id="places">
-    <h2 class="sec-title"><span class="dot">📍</span>장소명 (택시·길찾기용)</h2>
-    <p style="font-size:13px;color:var(--sub);margin:-4px 2px 10px">택시 기사에게 보여주거나 지도앱에 붙여넣기 — <b>복사</b> 누르면 중국어가 복사돼요.</p>
-    <div class="card" id="placeList">
-      <!-- filled by JS -->
-    </div>
-  </section>
-
-  <!-- PACK -->
-  <section id="pack">
-    <h2 class="sec-title"><span class="dot">🧳</span>준비물 체크리스트</h2>
-    <div class="card check" id="packList">
-      <!-- filled by JS -->
-    </div>
-    <div class="card" style="margin-top:12px">
-      <div class="note">💴 위안화 <b>300~500元</b> 정도 환전 추천 · e-SIM 사용 시 VPN 불필요</div>
-    </div>
-  </section>
-
-  <footer>
-    PDF 일정표 기반 · 도착시간은 현지시간 기준<br>
-    이동 소요시간은 교통상황에 따라 달라질 수 있어요 🌊
-  </footer>
+<div class="install" id="install"><span>📲 홈 화면에 추가하면 앱처럼 열리고 <b>오프라인</b>에서도 일정을 볼 수 있어요</span><button id="installBtn">설치</button></div>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>날씨 · 환율<span class="sechev">▶</span></button><div class="sec-body">
+<div class="grid" id="weather"></div>
+<div class="conv">
+<div class="cv-row"><input id="eur" type="number" inputmode="decimal" value="100" min="0" aria-label="위안"> <span class="eq">元  →</span> <span class="won" id="won"></span></div>
+<div class="rate">환율 1元 = <input id="rate" type="number" inputmode="numeric" min="0"> 원 <span>· 출발 전 현재 환율로 수정하세요</span></div>
+</div></div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>예상 비용 (1인 기준)<span class="sechev">▶</span></button><div class="sec-body">
+<div class="cost" id="costList"></div>
+<div class="cost-sum" id="costSum"></div>
+<div class="cost-note">※ <b>1인 기준 대략 추정치</b>예요(현지 소비는 元). 항공·숙소는 예약 시점에 따라 차이가 큽니다. 위 '날씨·환율'에서 환율을 바꾸면 원화 금액이 여기에도 함께 반영돼요.</div>
+</div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>💸 경비 가계부<span class="sechev">▶</span></button><div class="sec-body">
+<div id="expSummary"></div>
+<div class="expform">
+<div class="ef-row"><input id="expAmt" type="number" inputmode="decimal" placeholder="금액 元" min="0"><select id="expCat" aria-label="분류"></select></div>
+<div class="ef-row"><div class="seg" id="expPayer"><button type="button" data-v="나" class="on">나</button><button type="button" data-v="일행">일행</button></div><div class="seg" id="expType"><button type="button" data-v="공동" class="on">공동</button><button type="button" data-v="개인">개인</button></div></div>
+<div class="ef-row"><input id="expMemo" type="text" placeholder="메모 (선택)" maxlength="40"><button id="expAdd" class="ef-add" type="button">+ 추가</button></div>
 </div>
-
-<div class="toast" id="toast">복사됐어요 ✓</div>
-
+<div id="expList"></div></div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>🧳 준비물 체크리스트<span class="sechev">▶</span></button><div class="sec-body">
+<div class="prog" id="packProg"></div>
+<div id="packing"></div></div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>🗣 중국어 회화·메뉴<span class="sechev">▶</span></button><div class="sec-body">
+<div class="phrnote">현지에서 한마디! <b>굵은 글씨</b>가 중국어(간체), 작은 글씨가 한글 발음이에요</div>
+<div id="phrases"></div></div></section>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>항공권<span class="sechev">▶</span></button><div class="sec-body"><div class="grid" id="flights"></div></div></section>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>숙소<span class="sechev">▶</span></button><div class="sec-body"><div class="grid" id="hotels"></div></div></section>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>✅ 출발 전 준비 체크리스트<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>출발 전 꼭 해둘 것 모음 · 🔗 버튼으로 바로가기 · 완료하면 체크</span></div><div class="grid" id="resv" style="margin-top:8px"></div></div></section>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>📍 택시·길찾기 중국어 메모<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>택시(DiDi) 탈 때 기사에게 보여주거나 지도앱에 입력 · 📍 지도 버튼으로 위치 확인</span></div>
+<div class="grid" id="fado" style="margin-top:8px"></div></div></section>
+<section class="sec open"><button class="sec-toggle"><span class="tick"></span>일정<span class="sechev">▶</span></button><div class="sec-body">
+<div class="legend">
+<span class="stars">★</span>추천도(필수=★5)
+<span><i class="dot" style="background:var(--port)"></i>예약/필수</span>
+<span><i class="dot" style="background:var(--terra)"></i>☀ 기상</span>
+<span>📍지도 · 📝네이버후기 · 🎟예약</span>
+</div>
+<div class="tools">
+<span class="lbl">날짜 탭하면 펼쳐져요</span>
+<button class="tbtn reset" id="resetBtn">초기화</button>
+<button class="tbtn" id="editBtn">✏️ 편집</button>
+<button class="tbtn" id="toggleAll">모두 펼치기</button>
+</div>
+<div id="days"></div></div></section>
+<footer>2026 다롄 GIS 연구실 워크샵 · 모바일 보기용<br><span class="editnote">편집·체크 내용은 이 기기 브라우저에 저장돼요(지원 시)</span></footer>
+</div>
+<div class="detail" id="detail"><div class="dwrap">
+<button class="dback" onclick="history.back()">← 일정으로 돌아가기</button>
+<div class="dphoto" id="dphoto"></div>
+<div class="dcontent">
+<div class="dcat" id="dcat"></div>
+<h2 class="dtitle" id="dtitle"></h2>
+<div class="dstars" id="dstars"></div>
+<p class="ddesc" id="ddesc"></p>
+<div class="dstory" id="dstory" style="display:none"></div>
+<div class="dtip" id="dtip" style="display:none"></div>
+<div class="dwiki" id="dwiki" style="display:none"></div>
+<div class="dacts" id="dacts"></div>
+</div></div></div>
 <script>
-  // ---- Countdown ----
-  (function(){
-    var target = new Date(2026,5,24,11,25,0); // 6/24 11:25 KST
-    var el = document.getElementById('countdown');
-    function tick(){
-      var now = new Date();
-      var diff = target - now;
-      if(diff <= 0){
-        var end = new Date(2026,5,27,16,15,0);
-        el.textContent = (now < end) ? "🎉 다롄 여행 중!" : "✈️ 즐거운 워크샵이었길!";
-        return;
-      }
-      var d = Math.floor(diff/86400000);
-      el.textContent = "출발까지 D-" + d;
-    }
-    tick(); setInterval(tick, 60000);
-  })();
+const flights=[
+ {route:"인천 → 다롄 (ICN→DLC)",when:"6/24",sub:"중국남방항공 CZ686 · 11:25 → 11:40(현지) · 약 1시간 15분"},
+ {route:"다롄 → 인천 (DLC→ICN)",when:"6/27",sub:"중국남방항공 CZ695 · 14:00 → 16:15 · 약 2시간 15분"}];
+const hotels=[
+ {city:"다롄 (싱하이광장)",nights:"6/24–6/27 · 3박",name:"다롄 싱하이광장 아투어 호텔 · 大连星海广场博物馆亚朵酒店 (沙河口区星河路29号 · ☎0411-82193333)",status:"ok"}];
+// 택시·길찾기용 중국어 장소 메모 (이름에 중국어 병기 → 기사에게 보여주기 / 📍는 지도)
+const fado=[
+ {name:"🏨 호텔 · 大连星海广场博物馆亚朵酒店",meta:"沙河口区星河路29号 · ☎ 0411-82193333",m:"Atour Hotel Xinghai Square Dalian",b:null},
+ {name:"✈️ 공항 · 大连周水子国际机场",meta:"디디택시는 网约车(E-Hailing) 표지판 따라 · 일반 Taxi 아님 주의",m:"Dalian Zhoushuizi International Airport",b:null},
+ {name:"🌃 성해광장 · 星海广场",meta:"싱하이광장 · 아시아 최대 광장, 야경 명소",m:"Xinghai Square Dalian",b:null},
+ {name:"🚠 케이블카 입구 · 大连森林动物园广场",meta:"다롄삼림동물원 광장(동물원 관람 X → 케이블카 승강장)",m:"Dalian Forest Zoo",b:null},
+ {name:"⚓ 어인부두 · 渔人码头",meta:"유럽풍 부두·카페거리",m:"Fisherman's Wharf Dalian",b:null},
+ {name:"🏮 동관가 · 东关街历史文化街区",meta:"역사문화거리(대련의 성수동)",m:"Dongguan Street Dalian",b:null},
+ {name:"🍢 서안로 야시장 · 长兴里小吃街西安路夜市",meta:"먹거리 야시장",m:"Xi'an Road Dalian",b:null},
+ {name:"🚤 동방수성 · 东方水城",meta:"운하·수상도시",m:"Eastern Venice Water City Dalian",b:null},
+ {name:"🚏 민주광장 · 民主广场",meta:"동방수성 가는 길 환승(13번 버스/택시)",m:"Minzhu Square Dalian",b:null}];
+const DAYS=[
+ {date:"6/24",dow:"수",title:"입국 · 연화산 케이블카",wake:"—",items:[
+  {t:"11:40",name:"다롄 저우스이쯔 공항 도착 (大连周水子国际机场)",desc:"CZ686 도착 → 입국수속·짐찾기 약 1시간",tip:"입국신고 QR 미리 준비 · 현지시간 = 한국시간 -1h",m:"Dalian Zhoushuizi International Airport",n:"다롄 저우스이쯔 공항"},
+  {t:"12:40",name:"공항 → 호텔 (디디택시 약 34분)",desc:"DiDi로 호텔(大连星海广场博物馆亚朵酒店) 이동",tip:"⚠ E-Hailing(网约车) 표지판 따라 이동 · 일반 Taxi 아님! GPS 부정확 → Pick up 위치 확인",m:"Atour Hotel Xinghai Square Dalian",n:"다롄 아투어 호텔"},
+  {t:"13:30",name:"짐 풀기 · 점심 (성해광장 근처)",s:3,desc:"체크인 후 성해광장 주변에서 점심식사",m:"Xinghai Square Dalian",n:"성해광장 맛집"},
+  {t:"16:00",name:"연화산 전망대 케이블카 🚠",s:5,desc:"디디로 다롄삼림동물원(大连森林动物园广场) 이동(약 10분) → 동물원 관람 X, 케이블카 승강장으로. 케이블카 타고 연화산 전망대에서 다롄 시내 조망",tip:"편도 60元 + 전망대 타워 20元 · 운영 ~19:30",m:"Lianhua Mountain Dalian",n:"다롄 연화산 케이블카"},
+  {t:"19:00",name:"성해광장 저녁식사",s:3,desc:"성해광장으로 돌아와 저녁식사",m:"Xinghai Square Dalian",n:"성해광장 저녁"},
+  {t:"20:00",name:"싱하이광장 야경 🌃",s:4,desc:"아시아 최대 광장의 야경 감상 후 호텔 복귀",m:"Xinghai Square Dalian",n:"다롄 성해광장 야경"}]},
+ {date:"6/25",dow:"목",title:"어인부두 · 서안로 야시장",wake:"08:30",items:[
+  {t:"09:30",name:"아침식사 후 출발",desc:"호텔 조식 또는 근처에서 아침"},
+  {t:"09:30",name:"호텔 → 어인부두 (디디 약 23분)",desc:"DiDi로 어인부두(渔人码头) 이동",m:"Fisherman's Wharf Dalian",n:"다롄 어인부두"},
+  {t:"10:00",name:"어인부두 (渔人码头) ⚓",s:4,desc:"부두를 따라 유럽풍 건축물이 늘어선 거리. 레스토랑·카페가 많아 사진 찍기 좋아요",m:"Fisherman's Wharf Dalian",n:"다롄 어인부두"},
+  {t:"12:00",name:"점심식사 (어인부두 인근)",s:3,desc:"부두 주변 해산물·카페",m:"Fisherman's Wharf Dalian",n:"다롄 어인부두 맛집"},
+  {t:"13:00",name:"어인부두 산책 이어서",desc:"바닷가 산책·카페·포토스팟"},
+  {t:"17:00",name:"어인부두 → 서안로 야시장 (디디 약 35분)",desc:"DiDi로 서안로 야시장(长兴里小吃街西安路夜市) 이동",m:"Xi'an Road Dalian",n:"다롄 서안로 야시장"},
+  {t:"18:30",name:"서안로 야시장 🍢",s:4,desc:"야시장 구경 및 자유롭게 저녁식사. 다양한 길거리 먹거리",m:"Xi'an Road Dalian",n:"다롄 서안로 야시장 먹거리"}]},
+ {date:"6/26",dow:"금",title:"동관가 · 동방수성",wake:"08:30",items:[
+  {t:"09:30",name:"아침식사 후 출발",desc:"호텔 조식 또는 근처에서 아침"},
+  {t:"09:30",name:"호텔 → 동관가 (디디 약 19분)",desc:"DiDi로 동관가(东关街历史文化街区) 이동",m:"Dongguan Street Dalian",n:"다롄 동관가"},
+  {t:"10:00",name:"동관가 (东关街) · 점심 🏮",s:5,desc:"최근 정비된 역사문화거리, '대련의 성수동'. 상점·카페·기념품·포토존. 파빌리온 몰에서 쇼핑/점심도 가능",tip:"거리 산책 + 상점 구경 후 다음 일정으로",m:"Dongguan Street Dalian",n:"다롄 동관가"},
+  {t:"14:00",name:"동방수성으로 이동 🚇",desc:"201번 전철 → 중국우정(中国邮政) 하차 후 1km(20분) 도보, 또는 민주광장(民主广场) 하차 후 13번 버스/택시",tip:"택시(디디)가 가장 편함",m:"Eastern Venice Water City Dalian",n:"다롄 동방수성 가는법"},
+  {t:"15:30",name:"동방수성 (东方水城) · 저녁 🚤",s:4,desc:"운하·유럽풍 수상도시 관람 및 저녁식사. 인근 갤러리아 백화점에서도 식사 가능",m:"Eastern Venice Water City Dalian",n:"다롄 동방수성"}]},
+ {date:"6/27",dow:"토",title:"귀국",wake:"08:00",items:[
+  {t:"~11:00",name:"산책 · 카페 ☕",s:3,desc:"체크아웃 전 성해광장 주변 산책, 카페에서 여유롭게",m:"Xinghai Square Dalian",n:"다롄 성해광장 카페"},
+  {t:"11:00",name:"호텔 → 공항 (디디 약 19분)",desc:"DiDi로 공항(大连周水子国际机场) 이동",m:"Dalian Zhoushuizi International Airport",n:"다롄 공항"},
+  {t:"11:00",name:"공항 점심 → 탑승",desc:"공항에서 점심식사 후 비행기 탑승",tip:"14:00 CZ695 출발 → 16:15 인천 도착"}]}
+];
+// 날짜별 근처 먹거리 POI (도보권·식도락) — w:위키 음식 영문명(사진), n:네이버검색
+const FOODS={
+"6/24":[
+ {name:"톈톈위강 (天天渔港·성해광장점)",desc:"다롄 대표 해산물 레스토랑 체인. 수족관에서 직접 고른 신선한 해산물을 즉석 조리해줘요.",m:"Tian Tian Yu Gang Xinghai Square Dalian",w:"Chinese seafood",n:"다롄 톈톈위강 해산물"},
+ {name:"다롄 해산물 (大连海鲜)",desc:"다롄은 발해·황해를 낀 항구도시라 조개·전복·해삼·새우가 저렴하고 싱싱해요. 해물찜·구이 강추.",m:"seafood restaurant Xinghai Square Dalian",w:"Seafood",n:"다롄 해산물 맛집"},
+ {name:"멘즈 (焖子)",desc:"고구마 전분묵을 철판에 지져 참깨·마늘 소스에 비벼 먹는 다롄 명물 길거리 음식.",m:"Dalian Menzi food",n:"다롄 멘즈 焖子"},
+ {name:"싱하이광장 카페거리",desc:"광장 주변 바다 전망 카페·디저트. 야경 보기 전 쉬어가기 좋아요.",m:"cafe Xinghai Square Dalian",n:"다롄 성해광장 카페"},
+ ],
+"6/25":[
+ {name:"어인부두 해산물 (渔人码头 海鲜)",desc:"부두 전망 레스토랑에서 즐기는 신선한 다롄 해산물. 유럽풍 거리의 카페·디저트도 인기.",m:"seafood restaurant Fisherman's Wharf Dalian",n:"다롄 어인부두 해산물"},
+ {name:"카오렁몐 (烤冷面)",desc:"철판에 구운 냉면을 소스·계란과 말아주는 동북식 길거리 간식.",m:"Kao Leng Mian street food Dalian",n:"카오렁몐 烤冷面"},
+ {name:"서안로 야시장 먹거리 (西安路夜市)",desc:"양꼬치·철판오징어·해산물구이·탕후루 등 다롄 야시장 길거리 음식 총집합.",m:"Xi'an Road night market food Dalian",n:"다롄 서안로 야시장 먹거리"},
+ {name:"양꼬치 (羊肉串)",desc:"중국 동북 지방의 대표 길거리 안주. 맥주(피지우)와 함께 즐겨요.",m:"lamb skewers Dalian",w:"Chuan (food)",n:"다롄 양꼬치"}],
+"6/26":[
+ {name:"동관가 거리 먹거리 (东关街 小吃)",desc:"역사문화거리 곳곳의 디저트·간식. 사진 찍으며 군것질하기 좋아요.",m:"Dongguan Street food Dalian",n:"다롄 동관가 먹거리"},
+ {name:"양자댜오루빙 (杨家吊炉饼)",desc:"화덕에 구운 다롄식 전통 빵. 현지인이 사랑하는 노포 맛.",m:"Dalian traditional bing",n:"다롄 양자댜오루빙"},
+ {name:"동북식 물만두·교자 (喜家德 등)",desc:"두툼한 동북식 물만두·교자 전문점. 든든한 한 끼로 좋아요.",m:"Xijiade dumplings Dalian",w:"Jiaozi",n:"다롄 만두 맛집"},
+ {name:"갤러리아 백화점 (동방수성)",desc:"동방수성 인근 백화점 식당가에서 깔끔하게 저녁 해결 가능.",m:"Galleria department store Dalian",n:"동방수성 갤러리아 백화점"}],
+"6/27":[
+ {name:"성해광장 카페 (출발 전)",desc:"체크아웃 후 바다 전망 카페에서 여유롭게. 다롄 빵집·디저트도 추천.",m:"cafe Xinghai Square Dalian",n:"다롄 성해광장 카페"},
+ {name:"다롄 공항 식당가 (大连周水子机场)",desc:"탑승 전 간단히 한 끼. 출국 전 마지막 식사.",m:"Dalian Zhoushuizi Airport restaurant",n:"다롄 공항 식당"}]
+};
+// 날짜별 추천 1일 투어/패키지 — q:영문검색(GYG/Viator/Klook), kq:한국어(마이리얼트립)
+const TOURS={
+"6/24":[
+ {name:"연화산 케이블카 + 전망대",desc:"케이블카 편도 60元 + 전망대 타워 20元 · 다롄 시내 파노라마(개별 이용)",price:"~80元",rec:{t:"일정포함",c:"g",why:"오늘 일정에 포함 · 동물원 관람 X, 케이블카 승강장으로 바로"},q:"Dalian Lianhua Mountain cable car ticket",kq:"다롄 연화산 케이블카"}],
+"6/25":[
+ {name:"뤼순(旅顺) 반나절 투어 (선택)",desc:"러·일 전쟁 유적·203고지·뤼순 군항. 근대사에 관심 있으면 추천",price:"~200元",rec:{t:"선택",c:"o",why:"다롄 외곽(차로 1시간) · 시간 여유 있을 때만"},q:"Dalian Lushun Port half day tour",kq:"다롄 뤼순 투어"},
+ {name:"금석탄(金石滩) 해안 지질공원 (대안)",desc:"기암괴석 해안·지질공원, 발해 바다 산책로",price:"~150元",rec:{t:"대안",c:"o",why:"어인부두 대신 자연 해안을 보고 싶다면"},q:"Dalian Jinshitan coastal geopark",kq:"다롄 금석탄"}],
+"6/26":[
+ {name:"성해광장 유람선·관람차 (선택)",desc:"바다에서 보는 다롄 스카이라인 · 대형 관람차 야경",price:"~120元",rec:{t:"선택",c:"o",why:"동방수성 일정과 시간 맞으면 저녁에 추가"},q:"Dalian Xinghai Square ferris wheel cruise",kq:"다롄 성해광장 유람선"}]
+};
+const KEY="dl_itin_v1";
+function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s);}catch(e){}return JSON.parse(JSON.stringify(DAYS));}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+let state=load();
+function isoOf(md){const p=md.split("/");return "2026-"+String(+p[0]).padStart(2,"0")+"-"+String(+p[1]).padStart(2,"0");}
+function todayIso(){const n=new Date();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");}
+function computeToday(){const t=todayIso();for(let i=0;i<state.length;i++){if(isoOf(state[i].date)===t)return i;}return -1;}
+const TODAY=computeToday();
+const open=new Set([TODAY>=0?TODAY:0]);
+// 날짜별 숙소(출발지) — mapq:지도 출발지, mode:추천 이동수단, decided:확정 여부
+const STAYS=[
+ {from:"6/24",to:"6/27",mapq:"Atour Hotel Xinghai Square Dalian",label:"아투어 호텔",mode:"driving",decided:true}];
+function mdnum(s){const p=(s||"").split("/");return (+p[0])*100+(+p[1]||0);}
+function stayFor(date){const x=mdnum(date);return STAYS.find(s=>mdnum(s.from)<=x&&x<=mdnum(s.to))||null;}
+function routeUrl(origin,places,mode){const e=encodeURIComponent;const wp=places.slice(0,9);const dest=wp[wp.length-1];const mids=wp.slice(0,-1);let u="https://www.google.com/maps/dir/?api=1&origin="+e(origin)+"&destination="+e(dest);if(mids.length)u+="&waypoints="+mids.map(e).join("%7C");return u+"&travelmode="+(mode||"transit");}
+// 구간별 추천 이동수단 + 대략 소요시간
+const LEGS={
+"6/24":[{m:"🚕",t:"공항 → 호텔 · 디디택시 약 34분(E-Hailing 网约车)"},{m:"🚕",t:"호텔 → 다롄삼림동물원(케이블카 입구) · 디디"},{m:"🚠",t:"케이블카 타고 연화산 전망대"},{m:"🚕",t:"성해광장 복귀 → 야경 → 호텔"}],
+"6/25":[{m:"🚕",t:"호텔 → 어인부두 · 디디 약 23분"},{m:"🚶",t:"어인부두 유럽풍 거리 산책 · 도보"},{m:"🚕",t:"어인부두 → 서안로 야시장 · 디디 약 35분"}],
+"6/26":[{m:"🚕",t:"호텔 → 동관가 · 디디 약 19분"},{m:"🚇",t:"동관가 → 동방수성 · 201번 전철(중국우정/민주광장 하차) 또는 디디"},{m:"🚕",t:"동방수성 → 호텔 · 디디"}],
+"6/27":[{m:"🚶",t:"성해광장 산책·카페"},{m:"🚕",t:"호텔 → 공항 · 디디 약 19분"}]
+};
+function routeBtn(d){
+ const ps=d.items.filter(it=>it.m).map(it=>it.m),stay=stayFor(d.date);
+ if(!ps.length||!stay)return "";
+ const modes=[["walking","🚶 도보"],["transit","🚌 대중교통"],["driving","🚗 자동차"]];
+ const chips=modes.map(m=>`<a class="drmode${m[0]===stay.mode?" on":""}" target="_blank" rel="noopener" href="${routeUrl(stay.mapq,ps,m[0])}">${m[1]}</a>`).join("");
+ const legs=LEGS[d.date];
+ const legsHtml=legs?`<div class="drlegs">${legs.map(l=>`<div class="drleg"><span class="dlm">${l.m}</span><span>${esc(l.t)}</span></div>`).join("")}<div class="drlegnote">⏱ 소요시간은 대략치예요 · 정확한 건 위 이동수단 버튼(지도)에서 확인</div></div>`:"";
+ return `<div class="dayroute"><div class="drhead">🗺 하루 동선 · <b>${esc(stay.label)}</b>에서 출발 · ${ps.length}곳</div><div class="drmodes">${chips}</div>${legsHtml}</div>`;
+}
+function foodBlock(date){const fs=FOODS[date];if(!fs||!fs.length)return "";return `<div class="foodwrap"><div class="foodhead">🍴 이 근처 먹거리 <b>${fs.length}</b></div>${fs.map(f=>`<a class="foodcard" href="#p/${slug(f.m)}"><span class="fcn">${esc(f.name)}</span><span class="fcd">${esc(f.desc)}</span></a>`).join("")}</div>`;}
+function tourBlock(date){const ts=TOURS[date];if(!ts||!ts.length)return "";return `<div class="tourwrap"><div class="tourhead">🎫 추천 1일 투어·패키지 <b>${ts.length}</b></div>${ts.map(t=>`<div class="tourcard"><div class="tctop"><span class="tcn">${esc(t.name)}</span><span class="tcp">${esc(t.price)}</span></div>${t.rec?`<div class="tcrec ${t.rec.c}"><b>${esc(t.rec.t)}</b>${esc(t.rec.why)}</div>`:""}<div class="tcd">${esc(t.desc)}</div><div class="tchips">${TOURP.map(pf=>`<a class="tchip" target="_blank" rel="noopener" href="${pf.u(t.q,t.kq)}">${pf.n} ↗</a>`).join("")}</div></div>`).join("")}<div class="tournote">🔴강력추천 = 투어가 확실히 나음 · 🔵개인추천 = 직접(렌터카·도보)이 나음 · ⚪선택 = 취향 · 같은 투어도 플랫폼마다 가격이 달라요</div></div>`;}
+const mapUrl=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+const revUrl=q=>"https://search.naver.com/search.naver?ssc=tab.blog.all&query="+encodeURIComponent(q+" 후기");
+const bookUrl=b=>/^https?:/.test(b)?b:"https://www.google.com/search?q="+encodeURIComponent(b);
+// 1일 투어 예약 플랫폼 검색(가격 비교)
+const TOURP=[
+ {n:"GetYourGuide",u:q=>"https://www.getyourguide.com/s/?q="+encodeURIComponent(q)},
+ {n:"Viator",u:q=>"https://www.viator.com/search/"+encodeURIComponent(q)},
+ {n:"Klook",u:q=>"https://www.klook.com/en-US/search/?query="+encodeURIComponent(q)},
+ {n:"마이리얼트립",u:(q,kq)=>"https://www.myrealtrip.com/search?q="+encodeURIComponent(kq||q)}];
+const gimgUrl=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
+const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+// 장소 설명: m(지도검색어) 그대로 key. ko=한국어 설명, wk=위키백과 영문 제목(사진·추가설명)
+const PLACE_INFO={
+"Dalian Zhoushuizi International Airport":{wk:"Dalian Zhoushuizi International Airport",ko:"다롄 도심에서 가까운 국제공항. 택시(디디)는 '网约车(E-Hailing)' 표지판을 따라가야 하고, 일반 'Taxi' 승강장과 다르니 주의하세요."},
+"Atour Hotel Xinghai Square Dalian":{ko:"성해광장 인근의 아투어(亚朵) 호텔. 주소 大连市沙河口区星河路29号, ☎ 0411-82193333. 디디 호출 시 이 중국어 이름을 보여주면 편해요."},
+"Xinghai Square Dalian":{wk:"Xinghai Square",ko:"아시아 최대 규모의 도시 광장. 1997년 홍콩 반환·다롄 개항 100주년을 기념해 바다를 메워 만들었어요. 바닷가 산책로와 야경이 특히 예뻐요."},
+"Lianhua Mountain Dalian":{ko:"케이블카로 오르는 다롄 시내 전망대. 도심과 바다를 한눈에 내려다볼 수 있어요. 케이블카 편도 60元 + 전망대 타워 20元."},
+"Dalian Forest Zoo":{wk:"Dalian Forest Zoo",ko:"연화산 케이블카 승강장이 있는 곳. 동물원 자체는 패스하고 광장(大连森林动物园广场)에서 케이블카 승강장으로 이동해요."},
+"Fisherman's Wharf Dalian":{ko:"바닷가를 따라 알록달록한 유럽풍 건축물이 늘어선 부두. 레스토랑·카페가 많아 산책과 사진 촬영 명소예요."},
+"Xi'an Road Dalian":{ko:"다롄 최대 번화가 중 하나인 서안로. 长兴里小吃街 야시장에서 양꼬치·해산물구이·카오렁몐 등 길거리 먹거리를 즐길 수 있어요."},
+"Dongguan Street Dalian":{ko:"최근 정비된 역사문화거리로 '대련의 성수동'이라 불려요. 옛 건물 사이로 상점·카페·기념품 가게·포토존이 가득해요."},
+"Eastern Venice Water City Dalian":{ko:"운하를 따라 유럽풍 건물을 세운 수상 테마 거리(东方水城). 다리와 물길을 배경으로 사진 찍기 좋고 인근 백화점에서 식사도 가능해요."},
+"Minzhu Square Dalian":{ko:"동방수성으로 가는 길에 거치는 광장. 여기서 13번 버스나 택시로 갈아타면 돼요."}
+};
+// 지역별 재미있는 이야기·지리 이야기 (상세 페이지 표시) — key는 m
+const STORY={
+"Xinghai Square Dalian":"성해광장은 약 110만㎡로 '아시아에서 가장 큰 도시 광장'으로 불려요. 원래 쓰레기 매립장이던 바닷가를 메워 1997년에 조성했는데, 그해 홍콩 반환과 다롄 개항 100주년을 함께 기념한 자리예요. 광장 바닥엔 1,000개의 발자국 동판과 별 모양 디자인이 깔려 있고, 바다 쪽 끝에는 책을 펼친 모양의 기념탑이 서 있어요. 다롄은 19세기 말 러시아가 항구도시로 개발하고 이후 일본이 점령했던 역사가 있어, 도시 곳곳에 유럽풍·러시아풍 건축과 넓은 광장·로터리가 많은 게 특징입니다.",
+"Dongguan Street Dalian":"동관가(东关街)는 20세기 초 다롄의 옛 주거·상업 거리였다가 낡아 방치됐던 곳을, 최근 옛 벽돌 건물의 정취를 살려 카페·상점 거리로 되살린 곳이에요. 그래서 한국 사람들 사이에서 '대련의 성수동'으로 통합니다. 레트로한 골목과 벽화가 많아 사진 찍기 좋아요.",
+"Fisherman's Wharf Dalian":"어인부두(渔人码头)는 미국 샌프란시스코의 피셔맨스 워프를 본떠 만든 유럽풍 해안 단지예요. 파스텔톤 건물과 요트 선착장, 바다 전망 카페가 어우러져 다롄의 대표 포토스팟이 됐습니다.",
+"Lianhua Mountain Dalian":"연화산(莲花山) 전망대는 다롄 시내를 가장 넓게 조망할 수 있는 곳 중 하나예요. 케이블카로 능선을 오르면 도심의 빌딩숲과 바다가 한눈에 펼쳐져, 해질녘과 야경 시간대에 특히 인기가 많아요."
+};
+const starHtml=s=>s?`<div class="stars">${"★".repeat(s)}<span class="se">${"★".repeat(5-s)}</span></div>`:"";
+document.getElementById("flights").innerHTML=flights.map(f=>`<div class="info"><div class="top"><span class="route">${f.route}</span><span class="when">${f.when}</span></div><div class="sub">${f.sub}</div></div>`).join("");
+document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div>${h.b?`<div class="acts"><a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약 보기</a></div>`:""}</div>`).join("");
+document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts"><a class="btn map" target="_blank" rel="noopener" href="${mapUrl(f.m)}">📍 지도</a>${f.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(f.b)}">🎟 예약</a>`:""}</div></div>`).join("");
+function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function render(){
+ document.getElementById("days").innerHTML=state.map((d,i)=>`<div class="day${open.has(i)?" open":""}${i===TODAY?" today":""}">
+ <button class="day-head" onclick="toggleDay(${i})"><span class="date-badge"><span class="d">${d.date}</span><span class="w">${d.dow}</span></span><span class="title"><span class="t">${esc(d.title)}${i===TODAY?'<span class="todaytag">오늘</span>':''}</span><span class="wake">☀ 기상 ${d.wake}</span></span><span class="chev">▶</span></button>
+ <div class="day-body">${routeBtn(d)}${d.items.map((it,j)=>`<div class="it${it.res?" res":""}"><div class="time">${esc(it.t)}</div><div class="body"><div class="name">${it.m?`<a class="pname" href="#p/${slug(it.m)}">${esc(it.name)}</a>`:esc(it.name)}${it.s===5?'<span class="tag must">필수</span>':''}${it.res?'<span class="tag res">예약</span>':''}${it.liq?'<span class="tag liq">🍷</span>':''}<button class="rm" onclick="rm(${i},${j})">✕ 삭제</button></div>${starHtml(it.s)}<div class="desc">${esc(it.desc)}</div>${it.tip?`<div class="tip${/⚠|필수|예약/.test(it.tip)?" warn":""}">${esc(it.tip)}</div>`:""}${(it.m||it.n||it.b)?`<div class="acts">${it.m?`<a class="btn map" target="_blank" rel="noopener" href="${mapUrl(it.m)}">📍 지도</a>`:""}${it.n?`<a class="btn rev" target="_blank" rel="noopener" href="${revUrl(it.n)}">📝 후기</a>`:""}${it.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(it.b)}">🎟 예약</a>`:""}</div>`:""}</div></div>`).join("")}${foodBlock(d.date)}${tourBlock(d.date)}
+ <div class="add-row"><button class="add-btn" onclick="add(${i})">+ 일정 추가</button></div></div></div>`).join("");
+}
+function toggleDay(i){open.has(i)?open.delete(i):open.add(i);render();}
+function rm(i,j){state[i].items.splice(j,1);save();render();}
+function add(i){const t=prompt("시간 (예: 오후, 14:00)","오후");if(t===null)return;const name=prompt("장소/내용을 입력하세요");if(!name)return;const star=parseInt(prompt("추천도 별점 0~5 (선택)","0"),10)||0;state[i].items.push({t:t||"",name:name,s:Math.max(0,Math.min(5,star)),desc:""});open.add(i);save();render();}
+const reservations=[
+ {when:"D-7",name:"중국 입국신고서 온라인 작성",note:"2025.11.20부터 의무 · 작성 후 QR 캡쳐/저장 · 여권·호텔주소(大连市沙河口区星河路29号)·항공편(CZ686/CZ695) 필요",m:"Dalian China",b:"https://s.nia.gov.cn/ArrivalCardFillingPC/"},
+ {when:"D-7",name:"e-SIM 구매·설치 (중국용)",note:"한국 이심 사용 시 VPN 불필요 · 데이터 넉넉히",m:"China eSIM",b:"중국 다롄 eSIM 추천"},
+ {when:"D-5",name:"Alipay 카드 등록",note:"결제 메인 · 해외카드 등록 후 사용",m:"Alipay",b:"알리페이 해외카드 등록 방법"},
+ {when:"D-5",name:"WeChat 지갑 카드 등록",note:"알리페이 안 될 때 대비 · [나]>[결제 및 서비스]>[지갑]",m:"WeChat Pay",b:"위챗페이 카드 등록 방법"},
+ {when:"D-5",name:"DiDi(디디) 설치",note:"DiDi China(=滴滴) · DiDi Rider 아님 주의 · 택시 메인 · GPS 부정확 주의",m:"DiDi China",b:"DiDi China 앱 사용법"},
+ {when:"D-5",name:"지도앱 설치 (Amap·Baidu)",note:"Amap(가오더) 로그인 불필요 · 안 되면 m.amap.com",m:"Amap",b:"중국 여행 Amap 사용법"},
+ {when:"D-3",name:"위안화 환전 (300~500元)",note:"현금 소액 + 알리페이/위챗 결제 병행",m:"Dalian currency exchange",b:"위안화 환전"},
+ {when:"D-1",name:"준비물 최종 체크",note:"여권·보조배터리·멀티어댑터·상비약·얇은 겉옷·우산·휴대용 티슈 (아래 준비물 참고)",m:"Dalian",b:"다롄 6월 날씨"}];
+const CKEY="dl_resv_v1";
+let checked=(()=>{try{return JSON.parse(localStorage.getItem(CKEY))||{};}catch(e){return {};}})();
+function saveChecked(){try{localStorage.setItem(CKEY,JSON.stringify(checked));}catch(e){}}
+function renderResv(){
+ const total=reservations.length;let done=0;
+ const cards=reservations.map((r,i)=>{const on=!!checked[i];if(on)done++;
+  return `<div class="fcard${on?" done":""}"><div class="fhead"><button class="chk${on?" on":""}" onclick="toggleChk(${i})" aria-label="예약 완료 체크">✓</button><div class="fn"><span class="rdate">${r.when}</span>${r.name}</div></div><div class="fm">${r.note}</div><div class="acts"><a class="btn book" target="_blank" rel="noopener" href="${bookUrl(r.b)}">🎟 예약</a><a class="btn map" target="_blank" rel="noopener" href="${mapUrl(r.m)}">📍 지도</a></div></div>`;}).join("");
+ const pct=Math.round(done/total*100);
+ document.getElementById("resv").innerHTML=`<div class="prog"><div class="bar"><div class="fill" style="width:${pct}%"></div></div><div class="lbl">준비 완료 ${done} / ${total} (${pct}%)</div></div>`+cards;
+}
+function toggleChk(i){checked[i]=!checked[i];saveChecked();renderResv();}
+renderResv();
+document.querySelectorAll(".sec-toggle").forEach(b=>b.onclick=()=>b.parentElement.classList.toggle("open"));
+render();
+const editBtn=document.getElementById("editBtn");
+editBtn.onclick=()=>{document.body.classList.toggle("edit");editBtn.classList.toggle("on");editBtn.textContent=document.body.classList.contains("edit")?"✏️ 편집 끝":"✏️ 편집";};
+document.getElementById("resetBtn").onclick=()=>{if(confirm("편집한 내용을 모두 초기화할까요?")){try{localStorage.removeItem(KEY);}catch(e){}state=JSON.parse(JSON.stringify(DAYS));render();}};
+const tg=document.getElementById("toggleAll");
+tg.onclick=()=>{const allOpen=open.size>=state.length;state.forEach((_,i)=>allOpen?open.delete(i):open.add(i));render();tg.textContent=allOpen?"모두 펼치기":"모두 접기";};
 
-  // ---- Places ----
-  var places = [
-    ["호텔 (싱하이광장 아투어)","大连星海广场博物馆亚朵酒店"],
-    ["다롄 저우스이쯔 국제공항","大连周水子国际机场"],
-    ["성해광장 / 싱하이광장","星海广场"],
-    ["다롄삼림동물원 (케이블카 입구)","大连森林动物园广场"],
-    ["어인부두","渔人码头"],
-    ["동관가 (역사문화거리)","东关街历史文化街区"],
-    ["서안로 야시장","长兴里小吃街西安路夜市"],
-    ["동방수성","东方水城"],
-    ["민주광장","民主广场"],
-    ["중국우정","中国邮政"]
-  ];
-  var pl = document.getElementById('placeList');
-  places.forEach(function(p){
-    var row = document.createElement('div');
-    row.className = 'copy-row';
-    row.innerHTML = '<div class="info"><div class="ko">'+p[0]+'</div><div class="zh">'+p[1]+'</div></div>'
-      + '<button class="copy-btn" data-copy="'+p[1]+'">복사</button>';
-    pl.appendChild(row);
-  });
+/* ===== 날씨: 평년값 + 실시간 예보(open-meteo, 무료·키없음) ===== */
+const WXCITY=[
+ {name:"다롄 (大连)",lat:38.91,lon:121.61,dates:["2026-06-24","2026-06-25","2026-06-26","2026-06-27"],clim:"낮 <b>24°</b> / 밤 18° · 해양성·바닷바람·선선"}];
+function wmo(c){if(c===0)return["☀️","맑음"];if(c<=2)return["🌤","대체로 맑음"];if(c===3)return["☁️","흐림"];if(c<=48)return["🌫","안개"];if(c<=57)return["🌦","이슬비"];if(c<=67)return["🌧","비"];if(c<=77)return["🌨","눈"];if(c<=82)return["🌧","소나기"];if(c<=99)return["⛈","뇌우"];return["🌡",""];}
+function cachedWx(){try{return JSON.parse(localStorage.getItem("dl_wx_v1"))||{};}catch(e){return{};}}
+function renderWeather(fc){fc=fc||cachedWx();document.getElementById("weather").innerHTML=WXCITY.map(c=>{const days=fc[c.name]||[];const chips=days.map(d=>{const e=wmo(d.code)[0];const md=d.dt.slice(5).replace("-","/").replace(/^0/,"");return `<span class="wxchip">${md} ${e} <b>${d.mx}°</b>/${d.mn}° 💧${d.pop==null?0:d.pop}%</span>`;}).join("");return `<div class="wcard"><div class="wc">${c.name}</div><div class="wt">${c.clim}</div>${chips?`<div class="wxrow">${chips}</div>`:`<div class="wxsoon">⛅ 실제 예보는 출발 ~2주 전부터 자동 표시돼요</div>`}</div>`;}).join("");}
+async function loadWeather(){try{const host="https://api.open-meteo.com/v1/forecast";const res=await Promise.all(WXCITY.map(c=>fetch(`${host}?latitude=${c.lat}&longitude=${c.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=16`).then(r=>r.json()).catch(()=>null)));const out={};res.forEach((j,i)=>{if(!j||!j.daily)return;const d=j.daily,map={};d.time.forEach((t,k)=>{map[t]={code:d.weather_code[k],mx:Math.round(d.temperature_2m_max[k]),mn:Math.round(d.temperature_2m_min[k]),pop:d.precipitation_probability_max[k]};});out[WXCITY[i].name]=WXCITY[i].dates.filter(dt=>map[dt]).map(dt=>({dt,...map[dt]}));});if(Object.values(out).some(a=>a.length)){try{localStorage.setItem("dl_wx_v1",JSON.stringify(out));}catch(e){}renderWeather(out);}}catch(e){}}
+renderWeather();loadWeather();
 
-  // ---- Packing ----
-  var packItems = ["e-SIM (한국 이심)","보조배터리","휴대용 티슈","상비약","멀티 어댑터","우산","얇은 겉옷","위안화 300~500元","여권","입국신고 QR 캡쳐"];
-  var pk = document.getElementById('packList');
-  packItems.forEach(function(it,i){
-    var id = 'pk'+i;
-    var lab = document.createElement('label');
-    var saved = localStorage.getItem('pack_'+id)==='1';
-    lab.innerHTML = '<input type="checkbox" id="'+id+'" '+(saved?'checked':'')+'><span>'+it+'</span>';
-    pk.appendChild(lab);
-    lab.querySelector('input').addEventListener('change',function(e){
-      localStorage.setItem('pack_'+id, e.target.checked?'1':'0');
-    });
-  });
+/* ===== 환율 변환기 ===== */
+const RKEY="dl_rate_v1";
+const rateEl=document.getElementById("rate"),eurEl=document.getElementById("eur"),wonEl=document.getElementById("won");
+rateEl.value=(+localStorage.getItem(RKEY))||195;
+function calcWon(){const won=Math.round((+eurEl.value||0)*(+rateEl.value||0));wonEl.textContent="₩ "+won.toLocaleString("ko-KR");}
+eurEl.addEventListener("input",calcWon);
+rateEl.addEventListener("input",()=>{try{localStorage.setItem(RKEY,rateEl.value);}catch(e){}calcWon();renderCost();});
+calcWon();
 
-  // ---- Copy buttons ----
-  var toast = document.getElementById('toast');
-  var toastTimer;
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){toast.classList.remove('show')},1400);
+/* ===== 예상 비용 (2인 기준·대략치) ===== */
+const costs=[
+ {l:"✈ 국제선 왕복 (인천↔다롄·CZ)",e:2000,s:"1인 · 시즌·예약시점 따라 차이 큼"},
+ {l:"🏨 호텔 3박 (1인 분담)",e:600,s:"아투어 호텔 · 1실 2인 분담 기준"},
+ {l:"🍽 식비 (해산물·야시장 등)",e:600,s:"1일 약 150元 × 4일"},
+ {l:"🚕 교통 (디디·케이블카·전철)",e:350,s:"공항·시내 이동 + 케이블카 80元"},
+ {l:"🎫 입장·관광",e:150,s:"전망대·관광지 입장료"},
+ {l:"🛍 기념품·기타·예비비",e:300,s:""}
+];
+function wonOf(e){return "₩"+Math.round(e*(+rateEl.value||0)).toLocaleString("ko-KR");}
+function renderCost(){
+ document.getElementById("costList").innerHTML=costs.map(c=>`<div class="crow"><div class="cl">${c.l}${c.s?`<small>${c.s}</small>`:""}</div><div class="cv"><div class="e">¥${c.e.toLocaleString()}</div><div class="w">${wonOf(c.e)}</div></div></div>`).join("");
+ const tot=costs.reduce((a,c)=>a+c.e,0),perDay=Math.round(tot/4),perPer=Math.round(tot/2);
+ document.getElementById("costSum").innerHTML=`<div><div class="st">총 합계 (1인 기준)</div><div class="sv">¥${tot.toLocaleString()} <small>${wonOf(tot)}</small></div></div><div style="text-align:right"><div class="st">하루 ¥${perDay.toLocaleString()}</div><div class="st">${wonOf(perDay)}/일</div></div>`;
+}
+renderCost();
+
+/* ===== D-Day & 시계 ===== */
+function updateDday(){
+ const n=new Date(),today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+ const start=new Date(2026,5,24),end=new Date(2026,5,27),DAY=864e5;let txt;
+ if(today<start)txt="D-"+Math.round((start-today)/DAY);
+ else if(today<=end)txt="여행 "+(Math.round((today-start)/DAY)+1)+"일차";
+ else txt="여행 마침 ♥";
+ document.getElementById("dday").textContent=txt;
+}
+function tzNow(tz){const n=new Date();
+ return {t:new Intl.DateTimeFormat("ko-KR",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false}).format(n),
+         d:new Intl.DateTimeFormat("ko-KR",{timeZone:tz,month:"numeric",day:"numeric",weekday:"short"}).format(n)};}
+function updateClocks(){
+ const pt=tzNow("Asia/Shanghai"),kr=tzNow("Asia/Seoul");
+ document.getElementById("clocks").innerHTML=
+  `<div class="clock">🇨🇳 다롄<b>${pt.t}</b><span class="cd">${pt.d}</span></div>`+
+  `<div class="clock">🇰🇷 한국<b>${kr.t}</b><span class="cd">${kr.d}</span></div>`;
+}
+updateDday();updateClocks();setInterval(updateClocks,1000);setInterval(updateDday,60000);
+
+/* ===== 다크모드 / 인쇄 ===== */
+const darkBtn=document.getElementById("darkBtn"),metaTheme=document.querySelector('meta[name="theme-color"]');
+function applyDark(on){document.body.classList.toggle("dark",on);darkBtn.textContent=on?"☀️":"🌙";if(metaTheme)metaTheme.setAttribute("content",on?"#13171c":"#16467F");}
+let dark=localStorage.getItem("dl_dark")==="1";applyDark(dark);
+darkBtn.onclick=()=>{dark=!dark;try{localStorage.setItem("dl_dark",dark?"1":"0");}catch(e){}applyDark(dark);};
+document.getElementById("printBtn").onclick=()=>window.print();
+
+/* ===== PWA: 설치 안내(안드로이드/아이폰) + 서비스워커 ===== */
+let deferredPrompt=null;
+const installBox=document.getElementById("install"),installBtn=document.getElementById("installBtn");
+const isStandalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+// 안드로이드/데스크톱 크롬: 자동 설치 프롬프트
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;if(!isStandalone)installBox.classList.add("show");});
+installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBox.classList.remove("show");};
+window.addEventListener("appinstalled",()=>installBox.classList.remove("show"));
+// 아이폰 사파리: 프롬프트 미지원 → 공유 버튼 수동 안내
+if(isIos&&!isStandalone){
+ installBtn.style.display="none";
+ installBox.querySelector("span").innerHTML=`📲 <b>아이폰</b> 설치: 사파리 하단 <b>공유</b> <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg> 버튼 → <b>'홈 화면에 추가'</b> 를 누르면 앱처럼 열려요`;
+ installBox.classList.add("show");
+}
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+
+/* ===== 장소 상세 페이지 (해시 라우팅) ===== */
+const PLACEIDX={};
+state.forEach(d=>d.items.forEach(it=>{if(it.m)PLACEIDX[slug(it.m)]=it;}));
+fado.forEach(f=>{if(f.m)PLACEIDX[slug(f.m)]=f;});
+Object.values(FOODS).forEach(arr=>arr.forEach(f=>{f.food=1;PLACEIDX[slug(f.m)]=f;}));
+const WKEY="dl_wiki_v1";
+function wikiCache(){try{return JSON.parse(localStorage.getItem(WKEY))||{};}catch(e){return{};}}
+function saveWiki(c){try{localStorage.setItem(WKEY,JSON.stringify(c));}catch(e){}}
+async function getWiki(key,enTitle,koTitle){
+ const c=wikiCache();
+ if(key in c)return c[key];
+ try{
+  let thumb=null,extract=null,url=null;
+  // 1) 영문 위키: 한국어 문서 링크 + 썸네일
+  if(enTitle){
+   const u="https://en.wikipedia.org/w/api.php?action=query&redirects=1&titles="+encodeURIComponent(enTitle.replace(/ /g,"_"))+"&prop=langlinks|pageimages&lllang=ko&lllimit=1&piprop=thumbnail&pithumbsize=720&format=json&formatversion=2&origin=*";
+   const j=await(await fetch(u)).json();
+   const pg=j&&j.query&&j.query.pages&&j.query.pages[0];
+   if(pg){if(pg.thumbnail&&pg.thumbnail.source)thumb=pg.thumbnail.source;if(!koTitle&&pg.langlinks&&pg.langlinks[0])koTitle=pg.langlinks[0].title;}
   }
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest('.copy-btn[data-copy]');
-    if(!btn) return;
-    var txt = btn.getAttribute('data-copy');
-    function done(){
-      btn.textContent='완료'; btn.classList.add('done');
-      showToast('복사됐어요: '+txt);
-      setTimeout(function(){btn.textContent='복사'; btn.classList.remove('done')},1500);
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(done, fallback);
-    } else { fallback(); }
-    function fallback(){
-      var ta=document.createElement('textarea'); ta.value=txt;
-      ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta);
-      ta.select(); try{document.execCommand('copy')}catch(_){}
-      document.body.removeChild(ta); done();
-    }
-  });
+  // 2) 한국어 위키 요약: 한국어 설명(+더 나은 사진)
+  if(koTitle){
+   const r=await fetch("https://ko.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(koTitle.replace(/ /g,"_")));
+   if(r.ok){const k=await r.json();if(k.type==="standard"){if(k.extract)extract=k.extract;url=((k.content_urls||{}).desktop||{}).page||null;if(k.thumbnail&&k.thumbnail.source)thumb=k.thumbnail.source;}}
+  }
+  // 3) 사진이 없으면 위키미디어 공용 이미지 검색(식당·시장 등도 바로 사진)
+  if(!thumb){
+   const q=enTitle||koTitle||key.replace(/-/g," ");
+   const cu="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)+"&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=720&format=json&origin=*";
+   const cj=await(await fetch(cu)).json();
+   const cp=cj&&cj.query&&cj.query.pages?Object.values(cj.query.pages):[];
+   if(cp[0]&&cp[0].imageinfo&&cp[0].imageinfo[0])thumb=cp[0].imageinfo[0].thumburl;
+  }
+  const data=(thumb||extract)?{thumb,extract,url}:null;
+  c[key]=data;saveWiki(c);
+  return data;
+ }catch(e){return null;}
+}
+function photoPlaceholder(photo){photo.innerHTML=`<div class="phpat"></div><div class="ph">📷</div>`;}
+function buildDetail(it,info,sl){
+ const name=it.name,desc=info.ko||it.desc||it.meta||"",s=it.s||0;
+ const cat=it.food?"🍴 먹거리":(it.liq?"🍷 와인·리쿼":(it.res?"🎟 예약 명소":(/공항|복귀|호텔 →|→ 공항|케이블카/.test(name)?"📍 이동":"📍 가볼 곳")));
+ document.getElementById("dcat").textContent=cat;
+ document.getElementById("dtitle").textContent=name;
+ document.getElementById("dstars").innerHTML=s?`${"★".repeat(s)}<span class="se">${"★".repeat(5-s)}</span> <span style="font-size:12px;color:var(--muted);font-weight:400">추천도 ${s}/5</span>`:"";
+ document.getElementById("ddesc").textContent=desc;
+ const storyEl=document.getElementById("dstory"),story=STORY[it.m];
+ if(story){storyEl.style.display="";storyEl.innerHTML="<b>🗺️ 알면 더 재밌는 이야기</b><br>"+esc(story);}else storyEl.style.display="none";
+ const tipEl=document.getElementById("dtip");
+ if(it.tip){tipEl.style.display="";tipEl.className="dtip"+(/⚠|필수|휴무/.test(it.tip)?" warn":"");tipEl.innerHTML="<b>💡 팁</b> "+esc(it.tip);}else tipEl.style.display="none";
+ const acts=[];
+ if(it.m)acts.push(`<a class="btn map" target="_blank" rel="noopener" href="${mapUrl(it.m)}">📍 지도</a>`);
+ if(it.n)acts.push(`<a class="btn rev" target="_blank" rel="noopener" href="${revUrl(it.n)}">📝 네이버후기</a>`);
+ if(it.b)acts.push(`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(it.b)}">🎟 예약</a>`);
+ document.getElementById("dacts").innerHTML=acts.join("");
+ const photo=document.getElementById("dphoto"),wiki=document.getElementById("dwiki");
+ wiki.style.display="none";wiki.innerHTML="";
+ photo.innerHTML=`<div class="phpat"></div><div class="dspin"></div>`;
+ getWiki(sl,info.wk||it.w,info.kw).then(w=>{
+  if(location.hash!=="#p/"+sl)return;
+  if(w&&w.thumb)photo.innerHTML=`<img src="${w.thumb}" alt="${esc(name)}">`+(w.url?`<a class="credit" target="_blank" rel="noopener" href="${w.url}">© 위키백과</a>`:"");
+  else photoPlaceholder(photo);
+  if(w&&w.extract){wiki.style.display="";wiki.innerHTML=esc(w.extract)+(w.url?`<a class="src" target="_blank" rel="noopener" href="${w.url}">위키백과에서 더 보기 ›</a>`:"");}
+ }).catch(()=>{if(location.hash==="#p/"+sl)photoPlaceholder(photo);});
+}
+function openDetail(sl){
+ const it=PLACEIDX[sl],d=document.getElementById("detail");
+ if(!it){d.classList.remove("open");document.body.style.overflow="";return;}
+ buildDetail(it,PLACE_INFO[it.m]||{},sl);
+ d.classList.add("open");d.scrollTop=0;document.body.style.overflow="hidden";
+}
+function closeDetail(){document.getElementById("detail").classList.remove("open");document.body.style.overflow="";}
+function route(){const m=location.hash.match(/^#p\/(.+)$/);if(m)openDetail(decodeURIComponent(m[1]));else closeDetail();}
+window.addEventListener("hashchange",route);
+route();
 
-  // ---- Smooth tab active feedback ----
-  document.querySelectorAll('nav.tabs a').forEach(function(a){
-    a.addEventListener('click', function(){
-      // close all days then open none; let anchor scroll
-    });
-  });
+/* ===== 준비물 체크리스트 ===== */
+const PACK=[
+ {g:"필수 서류·결제",items:["여권 (+사본)","입국신고 QR 캡쳐","위안화 현금 300~500元","해외결제 카드","Alipay·WeChat 카드등록 <small>(미리)</small>"]},
+ {g:"전자·통신",items:["e-SIM 또는 로밍 <small>(이심=VPN 불필요)</small>","보조배터리 <small>(사용량 많음·기내 휴대)</small>","멀티 어댑터","충전기·케이블"]},
+ {g:"앱 설치 (출발 전)",items:["DiDi China <small>(택시·滴滴)</small>","Amap·Baidu Map <small>(지도)</small>","파파고 <small>(번역)</small>","Meituan <small>(배달·선택)</small>"]},
+ {g:"의류",items:["얇은 겉옷 <small>(바닷바람·저녁)</small>","우산 <small>(6월 비 대비)</small>","편한 운동화","여름옷"]},
+ {g:"건강·세면",items:["상비약(소화·감기·진통)","휴대용 티슈 <small>(화장실 휴지 없는 곳 多)</small>","물티슈","선크림","세면도구"]},
+ {g:"기타",items:["에코백·장바구니","목베개 <small>(선택)</small>"]}
+];
+const PKEY="dl_pack_v1";
+let packed=(()=>{try{return JSON.parse(localStorage.getItem(PKEY))||{};}catch(e){return{};}})();
+function savePacked(){try{localStorage.setItem(PKEY,JSON.stringify(packed));}catch(e){}}
+function renderPack(){
+ let total=0,done=0;
+ const html=PACK.map((grp,gi)=>`<div class="pack-g"><div class="pg">${grp.g}</div>`+grp.items.map((it,ii)=>{const id=gi+"-"+ii;total++;const on=!!packed[id];if(on)done++;return `<div class="pitem${on?" on":""}" onclick="togglePack('${id}')"><button class="chk${on?" on":""}" aria-label="체크">✓</button><span class="pt">${it}</span></div>`;}).join("")+`</div>`).join("");
+ document.getElementById("packing").innerHTML=html;
+ const pct=total?Math.round(done/total*100):0;
+ document.getElementById("packProg").innerHTML=`<div class="bar"><div class="fill" style="width:${pct}%"></div></div><div class="lbl">챙긴 준비물 ${done} / ${total} (${pct}%)</div>`;
+}
+function togglePack(id){packed[id]=!packed[id];savePacked();renderPack();}
+renderPack();
+
+/* ===== 경비 가계부 ===== */
+const EKEY="dl_exp_v1";
+const ECATS=[["식비","🍽"],["숙소","🏨"],["교통","🚕"],["입장·관광","🎫"],["쇼핑·기념품","🛍"],["기타","🧾"]];
+let exps=(()=>{try{return JSON.parse(localStorage.getItem(EKEY))||[];}catch(e){return[];}})();
+let ePayer="나",eType="공동",eid=exps.reduce((m,e)=>Math.max(m,e.id||0),0);
+document.getElementById("expCat").innerHTML=ECATS.map(c=>`<option value="${c[0]}">${c[1]} ${c[0]}</option>`).join("");
+function segInit(id,set){const seg=document.getElementById(id);seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");set(b.dataset.v);});}
+segInit("expPayer",v=>ePayer=v);segInit("expType",v=>eType=v);
+function saveExps(){try{localStorage.setItem(EKEY,JSON.stringify(exps));}catch(e){}}
+function catIcon(c){const f=ECATS.find(x=>x[0]===c);return f?f[1]:"🧾";}
+document.getElementById("expAdd").onclick=()=>{const el=document.getElementById("expAmt"),amt=parseFloat(el.value);if(!amt||amt<=0){el.focus();return;}exps.unshift({id:++eid,a:amt,c:document.getElementById("expCat").value,p:ePayer,t:eType,m:document.getElementById("expMemo").value.trim()});saveExps();el.value="";document.getElementById("expMemo").value="";renderExp();};
+function delExp(id){exps=exps.filter(e=>e.id!==id);saveExps();renderExp();}
+function renderExp(){
+ const list=document.getElementById("expList"),sum=document.getElementById("expSummary");
+ const total=exps.reduce((s,e)=>s+e.a,0),budget=costs.reduce((a,c)=>a+c.e,0);
+ const shared=exps.filter(e=>e.t==="공동").reduce((s,e)=>s+e.a,0);
+ const eunShared=exps.filter(e=>e.t==="공동"&&e.p==="나").reduce((s,e)=>s+e.a,0);
+ const eunPaid=exps.filter(e=>e.p==="나").reduce((s,e)=>s+e.a,0),chaPaid=total-eunPaid;
+ const bal=eunShared-shared/2,pct=budget?Math.min(100,Math.round(total/budget*100)):0;
+ let settle="아직 정산할 공동지출이 없어요";
+ if(Math.abs(bal)>=0.5)settle=bal>0?`<b>일행 → 나 ¥${Math.round(bal).toLocaleString()}</b> 주면 공동비용 5:5 정산 완료`:`<b>나 → 일행 ¥${Math.round(-bal).toLocaleString()}</b> 주면 공동비용 5:5 정산 완료`;
+ sum.innerHTML=`<div class="exp-sum"><div class="es-top"><span class="es-tot">¥${total.toLocaleString(undefined,{maximumFractionDigits:0})}</span><span class="es-sub">예산 ¥${budget.toLocaleString()} 중 ${pct}% · ₩${Math.round(total*(+rateEl.value||0)).toLocaleString("ko-KR")}</span></div><div class="es-bar"><div class="es-fill" style="width:${pct}%"></div></div><div class="es-sub">나 ¥${Math.round(eunPaid).toLocaleString()} · 일행 ¥${Math.round(chaPaid).toLocaleString()} 결제</div><div class="es-set">⚖️ ${settle}</div></div>`;
+ if(!exps.length){list.innerHTML=`<div class="exp-empty">아직 입력한 지출이 없어요. 위에서 금액을 추가해보세요!</div>`;return;}
+ list.innerHTML=exps.map(e=>`<div class="exprow"><span class="ex-c">${catIcon(e.c)}</span><span class="ex-b"><span class="ex-m">${esc(e.m||e.c)}</span> <span class="ex-meta">${e.p}·${e.t}</span></span><span class="ex-a">¥${e.a.toLocaleString(undefined,{maximumFractionDigits:2})}</span><button class="ex-del" onclick="delExp(${e.id})" aria-label="삭제">✕</button></div>`).join("");
+}
+renderExp();
+
+/* ===== 중국어 회화·메뉴 ===== */
+const PHRASES=[
+ {g:"기본·인사",items:[["안녕하세요","你好","니 하오"],["감사합니다","谢谢","셰셰"],["천만에요","不客气","부 커치"],["죄송합니다","对不起","두이부치"],["네 / 아니요","是 / 不是","스 / 부스"],["영어 하세요?","你会说英语吗?","니 후이 슈어 잉위 마?"],["못 알아들었어요","我听不懂","워 팅부둥"],["천천히 말해 주세요","请说慢一点","칭 슈어 만 이뎬"]]},
+ {g:"택시·길찾기 🚕",items:[["여기로 가주세요","请到这里","칭 다오 쩌리"],["이 주소요 (보여주며)","这个地址","쩌거 디즈"],["공항으로","去机场","취 지창"],["호텔로","去酒店","취 지우뎬"],["여기서 세워주세요","就停这里","지우 팅 쩌리"],["디디 불렀어요","我叫了滴滴","워 자오러 디디"],["얼마나 걸려요?","要多久?","야오 둬지우?"],["화장실 어디예요?","洗手间在哪里?","시서우젠 짜이 나리?"]]},
+ {g:"식당에서",items:[["메뉴 주세요","菜单,谢谢","차이단, 셰셰"],["이거 주세요","要这个","야오 쩌거"],["안 맵게 해주세요","不要辣","부야오 라"],["계산해주세요","买单","마이단"],["정말 맛있어요","很好吃","헌 하오츠"],["맥주 한 병","一瓶啤酒","이 핑 피지우"],["물 주세요","来杯水","라이 베이 슈이"],["포장해주세요","打包","다바오"]]},
+ {g:"쇼핑·숫자",items:[["얼마예요?","多少钱?","둬사오 첸?"],["너무 비싸요","太贵了","타이 구이 러"],["깎아주세요","便宜点","피엔이 뎬"],["카드 돼요?","可以刷卡吗?","커이 슈아카 마?"],["알리페이/위챗","支付宝/微信","즈푸바오/웨이신"],["이거 있어요?","有这个吗?","유 쩌거 마?"],["1·2·3","一·二·三","이·얼·싼"]]},
+ {g:"한마디",items:[["괜찮아요","没关系","메이 관시"],["좋아요!","好的!","하오 더!"],["도와주세요","帮帮我","방방 워"],["사진 찍어주세요","帮我拍照","방 워 파이자오"]]}
+];
+document.getElementById("phrases").innerHTML=PHRASES.map(g=>`<div class="phr-g">${g.g}</div>`+g.items.map(it=>`<div class="phrcard"><span class="phr-l">${esc(it[0])}</span><span class="phr-r"><span class="phr-pt">${esc(it[1])}</span><span class="phr-pr">${esc(it[2])}</span></span></div>`).join("")).join("");
 </script>
 </body>
 </html>
