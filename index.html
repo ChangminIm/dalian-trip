@@ -31,9 +31,9 @@ body.dark .conv input{background:#11151a}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Noto Sans SC','NanumSquare','PingFang SC','Microsoft YaHei','Hiragino Sans GB','Malgun Gothic',system-ui,'Apple SD Gothic Neo',sans-serif;color:var(--ink);background:var(--paper);line-height:1.5;padding-bottom:60px}
 .wrap{max-width:680px;margin:0 auto;padding:0 16px}
-.hero{background:var(--azulejo);color:#fff;padding:26px 0 22px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:0;opacity:.10;background-image:radial-gradient(circle at 12px 12px,#fff 2px,transparent 2.5px),radial-gradient(circle at 0 0,transparent 11px,#fff 11px,#fff 12px,transparent 12px);background-size:24px 24px}
-.hero .wrap{position:relative}
+.hero{background-color:#0d2548;background-image:linear-gradient(180deg,rgba(8,28,55,.22) 0%,rgba(8,22,45,.45) 50%,rgba(6,16,38,.82) 100%),url('hero.jpg');background-image:linear-gradient(180deg,rgba(8,28,55,.22) 0%,rgba(8,22,45,.45) 50%,rgba(6,16,38,.82) 100%),-webkit-image-set(url('hero.avif') type('image/avif'),url('hero.jpg') type('image/jpeg'));background-image:linear-gradient(180deg,rgba(8,28,55,.22) 0%,rgba(8,22,45,.45) 50%,rgba(6,16,38,.82) 100%),image-set(url('hero.avif') type('image/avif'),url('hero.jpg') type('image/jpeg'));background-size:cover;background-position:center 45%;color:#fff;padding:34px 0 28px;min-height:min(48vh,320px);display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.hero::after{display:none}
+.hero .wrap{position:relative;width:100%;text-shadow:0 1px 10px rgba(0,0,0,.55)}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#bcd4f0;font-weight:800}
 .hero h1{font-family:'Noto Sans SC','NanumSquare','PingFang SC','Microsoft YaHei','Malgun Gothic',sans-serif;font-weight:800;font-size:34px;line-height:1.1;margin:6px 0 6px}
 .who{font-family:'Noto Sans SC','NanumSquare','PingFang SC','Microsoft YaHei','Malgun Gothic',sans-serif;font-weight:800;font-size:18px;color:#fff;margin:0 0 11px}
@@ -175,7 +175,7 @@ body.dark .tourwrap{background:#141d28;border-color:#28384c}
 .dphoto{position:relative;width:100%;aspect-ratio:16/10;background:var(--azulejo);overflow:hidden;display:flex;align-items:center;justify-content:center}
 .dphoto img{width:100%;height:100%;object-fit:cover;display:block}
 .dphoto .ph{font-size:60px;opacity:.9}
-.dphoto .phpat{position:absolute;inset:0;opacity:.12;background-image:radial-gradient(circle at 12px 12px,#fff 2px,transparent 2.5px);background-size:24px 24px}
+.dphoto .phpat{position:absolute;inset:0;opacity:.12;background-image:radial-gradient(circle at 12px 12px,#fff 2px,transparent 2.5px);background-size:24px 24px;opacity:.55}
 .dphoto .credit{position:absolute;right:8px;bottom:6px;font-size:9.5px;color:#fff;background:rgba(0,0,0,.4);padding:1px 6px;border-radius:6px;text-decoration:none}
 .dphoto .gimg{position:absolute;right:10px;bottom:10px;font-size:12px;font-weight:800;color:#fff;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.4);padding:6px 11px;border-radius:9px;text-decoration:none}
 .dspin{width:26px;height:26px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
@@ -423,21 +423,16 @@ const FOODS={
 "6/24":[
  {name:"시딩 성게물만두 (喜鼎海胆水饺·성해광장점)",desc:"다롄산 성게알을 듬뿍 넣은 우니 물만두로 유명. 오픈키친·넓고 쾌적, 1인 약 180元. (11:00–15:00 / 16:30–21:00)",m:"喜鼎海胆水饺 星海广场 大连",w:"Jiaozi",n:"다롄 시딩 성게만두"},
  {name:"하이즈샹 해산물뷔페 (海之乡)",desc:"훠궈+각종 해산물 무한리필. 살아있는 해물을 바로 조리해 신선해요. 평일 119元 / 주말 129元.",m:"海之乡 海鲜自助 大连",w:"Seafood",n:"다롄 해지향 해산물뷔페"},
- {name:"이징 해선주가 (奕景海鲜酒家·성해광장)",desc:"가성비 좋은 해산물집. 동파육도 인기. 여럿이 다양하게 시켜 먹기 좋아요.",m:"奕景海鲜酒家 星海广场 大连",w:"Seafood",n:"다롄 이경해선주가"},
- {name:"멘즈 (焖子) · 길거리 간식",desc:"고구마 전분묵을 철판에 지져 참깨·마늘 소스에 비벼 먹는 다롄 명물 간식.",m:"Dalian Menzi food",w:"Liangfen",n:"다롄 멘즈 焖子"}],
+ {name:"이징 해선주가 (奕景海鲜酒家·성해광장)",desc:"가성비 좋은 해산물집. 동파육도 인기. 여럿이 다양하게 시켜 먹기 좋아요.",m:"奕景海鲜酒家 星海广场 大连",w:"Seafood",n:"다롄 이경해선주가"}],
 "6/25":[
  {name:"핀하이러우 (品海楼·어인부두)",desc:"大众点评 7년 연속 必吃榜 선정. 어인부두 안 유럽풍 건물. 성게 군만두(海胆锅贴)·해장 볶음밥(海肠捞饭) 추천.",m:"品海楼 渔人码头 大连",w:"Jiaozi",n:"다롄 핀하이러우 品海楼"},
- {name:"서안로 야시장 먹거리 (西安路夜市)",desc:"양꼬치·마라 철판오징어·해산물구이·에그타르트·탕후루 등 길거리 음식 총집합.",m:"西安路夜市 大连",w:"Night market",n:"다롄 서안로 야시장 먹거리"},
+ {name:"대양 양꼬치 (大阳活羊肉串)",desc:"현지인으로 북적이는 다롄 로컬 양꼬치 노포. 1꼬치 약 2元, 고소하고 쫄깃. 17:00~24:00 (실내 흡연 주의) · 勤俭街29号.",m:"大阳活羊肉串 大连",w:"Chuan (food)",n:"다롄 대양 양꼬치"},
  {name:"지시 대냉면 (鸡西大冷面·交大店)",desc:"새콤달콤 시원한 동북식 냉면. 서안로 인근, 더운 날 별미예요.",m:"鸡西大冷面 西安路 大连",w:"Chinese noodles",n:"다롄 지시 냉면"},
- {name:"양꼬치·마라 철판오징어 (羊肉串)",desc:"숯불 양꼬치와 즉석 마라 철판오징어. 맥주(피지우) 안주로 최고.",m:"lamb skewers China",w:"Chuan (food)",n:"다롄 양꼬치"}],
+ {name:"서안로 야시장 (西安路夜市)",desc:"해 질 녘 거리 전체가 야시장으로. 철판오징어·해산물구이·에그타르트·탕후루 등 길거리 음식이 가득해요.",m:"西安路夜市 大连",w:"Night market",n:"다롄 서안로 야시장"}],
 "6/26":[
  {name:"닝닝지아 카페 (柠柠家·东关街店)",desc:"동관가의 감성 카페. 예쁜 야외 공간에서 빙수·디저트, 인생샷 명소. 长江路479号 (10:00–21:30).",m:"柠柠家 东关街 大连",w:"Patbingsu",n:"다롄 닝닝지아 카페"},
- {name:"동관가 거리 간식 (东关街 小吃)",desc:"탕후루·디저트·간식이 가득한 역사거리. Seesaw·Chagee(霸王茶姬) 등 카페도 인기.",m:"东关街 小吃 大连",w:"Tanghulu",n:"다롄 동관가 먹거리"},
- {name:"양자댜오루빙 (杨家吊炉饼)",desc:"화덕에 구운 다롄식 전통 빵. 현지인이 사랑하는 노포 맛.",m:"杨家吊炉饼 大连",w:"Shaobing",n:"다롄 양자댜오루빙"},
- {name:"갤러리아 백화점 식당가 (동방수성)",desc:"동방수성 인근 백화점에서 깔끔하게 저녁 해결 가능.",m:"Galleria department store Dalian",w:"Dalian",n:"동방수성 갤러리아 백화점"}],
-"6/27":[
- {name:"성해광장 카페 (출발 전)",desc:"체크아웃 후 바다 전망 카페에서 여유롭게. 다롄 빵집·디저트도 추천.",m:"cafe Xinghai Square Dalian",w:"Xinghai Square",n:"다롄 성해광장 카페"},
- {name:"다롄 공항 식당가 (大连周水子机场)",desc:"탑승 전 간단히 한 끼. 출국 전 마지막 식사.",m:"Dalian airport restaurant",w:"Dalian Zhoushuizi International Airport",n:"다롄 공항 식당"}]
+ {name:"양자댜오루빙 (杨家吊炉饼)",desc:"화덕에 구운 다롄식 전통 빵 노포. 현지인이 사랑하는 든든한 한 끼.",m:"杨家吊炉饼 大连",w:"Shaobing",n:"다롄 양자댜오루빙"},
+ {name:"밍지 카오위 (明吉烤鱼)",desc:"다롄 명물 카오위(즉석 생선구이) 맛집. 마라·청초·토마토 등 소스 선택, 바삭한 껍질. 동방수성·중산구 권역.",m:"明吉烤鱼 大连",w:"Barbecue",n:"다롄 밍지 카오위"}]
 };
 // 날짜별 추천 1일 투어/패키지 — q:영문검색(GYG/Viator/Klook), kq:한국어(마이리얼트립)
 const TOURS={
@@ -497,7 +492,7 @@ const TOURP=[
  {n:"Klook",u:q=>"https://www.klook.com/en-US/search/?query="+encodeURIComponent(q)},
  {n:"마이리얼트립",u:(q,kq)=>"https://www.myrealtrip.com/search?q="+encodeURIComponent(kq||q)}];
 const gimgUrl=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
-const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9一-鿿]+/g,"-").replace(/^-+|-+$/g,"");
+const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9\u4e00-\u9fff]+/g,"-").replace(/^-+|-+$/g,"");
 // 장소 설명: m(지도검색어) 그대로 key. ko=한국어 설명, wk=위키백과 영문 제목(사진·추가설명)
 const PLACE_INFO={
 "Dalian Zhoushuizi International Airport":{wk:"Dalian Zhoushuizi International Airport",ko:"다롄 도심에서 가까운 국제공항. 택시(디디)는 '网约车(E-Hailing)' 표지판을 따라가야 하고, 일반 'Taxi' 승강장과 다르니 주의하세요."},
@@ -754,7 +749,7 @@ function renderFoodAll(){
  const el=document.getElementById("foodall");if(!el)return;
  el.innerHTML=Object.keys(FOODS).map(date=>{
   const cards=FOODS[date].map(f=>{
-   const amap=/[一-鿿]/.test(f.m)?`<a class="btn amap" target="_blank" rel="noopener" href="${amapUrl(f.m)}">🗺 Amap</a>`:"";
+   const amap=/[\u4e00-\u9fff]/.test(f.m)?`<a class="btn amap" target="_blank" rel="noopener" href="${amapUrl(f.m)}">🗺 Amap</a>`:"";
    return `<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${esc(f.name)}</a></div><div class="fm">${esc(f.desc)}</div><div class="acts"><a class="btn map" target="_blank" rel="noopener" href="${mapUrl(f.m)}">📍 지도</a>${amap}${f.n?`<a class="btn rev" target="_blank" rel="noopener" href="${revUrl(f.n)}">📝 후기</a>`:""}</div></div>`;
   }).join("");
   return `<div class="phr-g">🍽 ${FOODAREA[date]||date}</div>${cards}`;
