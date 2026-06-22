@@ -1,5 +1,5 @@
 // 다롄 워크샵 일정 · 오프라인 캐시
-const CACHE = "dl-trip-v3";
+const CACHE = "dl-trip-v4";
 const IMGCACHE = "dl-img-v1";
 const ASSETS = [
   "./",
@@ -8,6 +8,8 @@ const ASSETS = [
   "fonts/NanumSquareR.woff2",
   "fonts/NanumSquareB.woff2",
   "fonts/NanumSquareEB.woff2",
+  "fonts/NotoSansSC-400.woff2",
+  "fonts/NotoSansSC-700.woff2",
   "icon-192.png",
   "icon-512.png"
 ];

@@ -12,13 +12,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="다롄 워크샵">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+
 <style>
 @font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareR.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareB.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareEB.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:'Noto Sans SC';src:url('fonts/NotoSansSC-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Noto Sans SC';src:url('fonts/NotoSansSC-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 :root{--ink:#1d2630;--muted:#6b7682;--paper:#FBFAF7;--azulejo:#16467F;--azulejo-2:#1E5DA8;
 --tint:#E9F0FA;--terra:#C8532B;--port:#8A2433;--gold:#B07A1E;--line:#E6E1D6;--star:#E0A92E;--card:#fff}
 body.dark{--ink:#e7eaee;--muted:#94a0ab;--paper:#13171c;--card:#1b2026;--tint:#1d2a3a;--line:#2b333d}
@@ -502,8 +504,8 @@ const STORY={
 };
 const starHtml=s=>s?`<div class="stars">${"★".repeat(s)}<span class="se">${"★".repeat(5-s)}</span></div>`:"";
 document.getElementById("flights").innerHTML=flights.map(f=>`<div class="info"><div class="top"><span class="route">${f.route}</span><span class="when">${f.when}</span></div><div class="sub">${f.sub}</div></div>`).join("");
-document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div><div class="acts">${h.g?`<a class="btn map" target="_blank" rel="noopener" href="${h.g}">📍 구글맵</a>`:""}${h.a?`<a class="btn amap" target="_blank" rel="noopener" href="${h.a}">🗺 高德 Amap</a>`:""}${h.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약</a>`:""}</div></div>`).join("");
-document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts">${f.zh?`<button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 복사</button>`:""}<a class="btn map" target="_blank" rel="noopener" href="${f.g||mapUrl(f.m)}">📍 구글</a><a class="btn amap" target="_blank" rel="noopener" href="${f.a||amapUrl(f.zh)}">🗺 高德</a></div></div>`).join("");
+document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div><div class="acts">${h.g?`<a class="btn map" target="_blank" rel="noopener" href="${h.g}">📍 구글맵</a>`:""}${h.a?`<a class="btn amap" target="_blank" rel="noopener" href="${h.a}">🗺 Amap</a>`:""}${h.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약</a>`:""}</div></div>`).join("");
+document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts">${f.zh?`<button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 복사</button>`:""}<a class="btn map" target="_blank" rel="noopener" href="${f.g||mapUrl(f.m)}">📍 구글</a><a class="btn amap" target="_blank" rel="noopener" href="${f.a||amapUrl(f.zh)}">🗺 Amap</a></div></div>`).join("");
 function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function render(){
  document.getElementById("days").innerHTML=state.map((d,i)=>`<div class="day${open.has(i)?" open":""}${i===TODAY?" today":""}">
