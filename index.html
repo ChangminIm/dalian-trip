@@ -12,6 +12,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="다롄 워크샵">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareR.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareB.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
@@ -295,6 +298,8 @@ body.dark .drhead{color:#b8a5e0}
  body,body.dark{background:#fff;padding:0;--ink:#000;--card:#fff}
 }
 .btn.copy{border-color:#cdeede;background:#EAF7F0;color:#1f9d6a}
+.btn.amap{border-color:#bfe3c4;background:#EAF6EC;color:#1f9d4d}
+body.dark .btn.amap{background:#14241a;border-color:#2a5135;color:#62cf86}
 body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1d2630;color:#fff;padding:11px 18px;border-radius:999px;font-size:13.5px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:90%;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -317,14 +322,6 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <div class="cv-row"><input id="eur" type="number" inputmode="decimal" value="100" min="0" aria-label="위안"> <span class="eq">元  →</span> <span class="won" id="won"></span></div>
 <div class="rate">환율 1元 = <input id="rate" type="number" inputmode="numeric" min="0"> 원 <span>· 출발 전 현재 환율로 수정하세요</span></div>
 </div></div></section>
-<section class="sec"><button class="sec-toggle"><span class="tick"></span>💸 경비 가계부<span class="sechev">▶</span></button><div class="sec-body">
-<div id="expSummary"></div>
-<div class="expform">
-<div class="ef-row"><input id="expAmt" type="number" inputmode="decimal" placeholder="금액 元" min="0"><select id="expCat" aria-label="분류"></select></div>
-<div class="ef-row"><div class="seg" id="expPayer"><button type="button" data-v="나" class="on">나</button><button type="button" data-v="일행">일행</button></div><div class="seg" id="expType"><button type="button" data-v="공동" class="on">공동</button><button type="button" data-v="개인">개인</button></div></div>
-<div class="ef-row"><input id="expMemo" type="text" placeholder="메모 (선택)" maxlength="40"><button id="expAdd" class="ef-add" type="button">+ 추가</button></div>
-</div>
-<div id="expList"></div></div></section>
 <section class="sec"><button class="sec-toggle"><span class="tick"></span>🗣 중국어 회화·메뉴<span class="sechev">▶</span></button><div class="sec-body">
 <div class="phrnote">현지에서 한마디! <b>굵은 글씨</b>가 중국어(간체), 작은 글씨가 한글 발음이에요</div>
 <div id="phrases"></div></div></section>
@@ -367,10 +364,10 @@ const flights=[
  {route:"인천 → 다롄 (ICN→DLC)",when:"6/24",sub:"중국남방항공 CZ686 · 11:25 → 11:40(현지) · 약 1시간 15분"},
  {route:"다롄 → 인천 (DLC→ICN)",when:"6/27",sub:"중국남방항공 CZ695 · 14:00 → 16:15 · 약 2시간 15분"}];
 const hotels=[
- {city:"다롄 (싱하이광장)",nights:"6/24–6/27 · 3박",name:"다롄 싱하이광장 아투어 호텔 · 大连星海广场博物馆亚朵酒店 (沙河口区星河路29号 · ☎0411-82193333)",status:"ok"}];
+ {city:"다롄 (싱하이광장)",nights:"6/24–6/27 · 3박",name:"다롄 싱하이광장 아투어 호텔 · 大连星海广场博物馆亚朵酒店 (沙河口区星河路29号 · ☎0411-82193333)",status:"ok",g:"https://maps.app.goo.gl/PCanHSG225btsBjG8",a:"https://surl.amap.com/10FjqJ01dxr"}];
 // 택시·길찾기용 중국어 장소 메모 (이름에 중국어 병기 → 기사에게 보여주기 / 📍는 지도)
 const fado=[
- {name:"🏨 호텔 · 大连星海广场博物馆亚朵酒店",meta:"沙河口区星河路29号 · ☎ 0411-82193333",m:"Atour Hotel Xinghai Square Dalian",zh:"大连星海广场博物馆亚朵酒店",b:null},
+ {name:"🏨 호텔 · 大连星海广场博物馆亚朵酒店",meta:"沙河口区星河路29号 · ☎ 0411-82193333",m:"Atour Hotel Xinghai Square Dalian",zh:"大连星海广场博物馆亚朵酒店",g:"https://maps.app.goo.gl/PCanHSG225btsBjG8",a:"https://surl.amap.com/10FjqJ01dxr",b:null},
  {name:"✈️ 공항 · 大连周水子国际机场",meta:"디디택시는 网约车(E-Hailing) 표지판 따라 · 일반 Taxi 아님 주의",m:"Dalian Zhoushuizi International Airport",zh:"大连周水子国际机场",b:null},
  {name:"🌃 성해광장 · 星海广场",meta:"싱하이광장 · 아시아 최대 광장, 야경 명소",m:"Xinghai Square Dalian",zh:"星海广场",b:null},
  {name:"🚠 케이블카 입구 · 大连森林动物园广场",meta:"다롄삼림동물원 광장(동물원 관람 X → 케이블카 승강장)",m:"Dalian Forest Zoo",zh:"大连森林动物园广场",b:null},
@@ -472,6 +469,7 @@ function routeBtn(d){
 function foodBlock(date){const fs=FOODS[date];if(!fs||!fs.length)return "";return `<div class="foodwrap"><div class="foodhead">🍴 이 근처 먹거리 <b>${fs.length}</b></div>${fs.map(f=>`<a class="foodcard" href="#p/${slug(f.m)}"><span class="fcn">${esc(f.name)}</span><span class="fcd">${esc(f.desc)}</span></a>`).join("")}</div>`;}
 function tourBlock(date){const ts=TOURS[date];if(!ts||!ts.length)return "";return `<div class="tourwrap"><div class="tourhead">🎫 추천 1일 투어·패키지 <b>${ts.length}</b></div>${ts.map(t=>`<div class="tourcard"><div class="tctop"><span class="tcn">${esc(t.name)}</span><span class="tcp">${esc(t.price)}</span></div>${t.rec?`<div class="tcrec ${t.rec.c}"><b>${esc(t.rec.t)}</b>${esc(t.rec.why)}</div>`:""}<div class="tcd">${esc(t.desc)}</div><div class="tchips">${TOURP.map(pf=>`<a class="tchip" target="_blank" rel="noopener" href="${pf.u(t.q,t.kq)}">${pf.n} ↗</a>`).join("")}</div></div>`).join("")}<div class="tournote">🔴강력추천 = 투어가 확실히 나음 · 🔵개인추천 = 직접(렌터카·도보)이 나음 · ⚪선택 = 취향 · 같은 투어도 플랫폼마다 가격이 달라요</div></div>`;}
 const mapUrl=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+const amapUrl=zh=>"https://uri.amap.com/search?keyword="+encodeURIComponent(zh)+"&city=大连";
 const revUrl=q=>"https://search.naver.com/search.naver?ssc=tab.blog.all&query="+encodeURIComponent(q+" 후기");
 const bookUrl=b=>/^https?:/.test(b)?b:"https://www.google.com/search?q="+encodeURIComponent(b);
 // 1일 투어 예약 플랫폼 검색(가격 비교)
@@ -504,8 +502,8 @@ const STORY={
 };
 const starHtml=s=>s?`<div class="stars">${"★".repeat(s)}<span class="se">${"★".repeat(5-s)}</span></div>`:"";
 document.getElementById("flights").innerHTML=flights.map(f=>`<div class="info"><div class="top"><span class="route">${f.route}</span><span class="when">${f.when}</span></div><div class="sub">${f.sub}</div></div>`).join("");
-document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div>${h.b?`<div class="acts"><a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약 보기</a></div>`:""}</div>`).join("");
-document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts">${f.zh?`<button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 중국어 복사</button>`:""}<a class="btn map" target="_blank" rel="noopener" href="${mapUrl(f.m)}">📍 지도</a></div></div>`).join("");
+document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div><div class="acts">${h.g?`<a class="btn map" target="_blank" rel="noopener" href="${h.g}">📍 구글맵</a>`:""}${h.a?`<a class="btn amap" target="_blank" rel="noopener" href="${h.a}">🗺 高德 Amap</a>`:""}${h.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약</a>`:""}</div></div>`).join("");
+document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts">${f.zh?`<button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 복사</button>`:""}<a class="btn map" target="_blank" rel="noopener" href="${f.g||mapUrl(f.m)}">📍 구글</a><a class="btn amap" target="_blank" rel="noopener" href="${f.a||amapUrl(f.zh)}">🗺 高德</a></div></div>`).join("");
 function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function render(){
  document.getElementById("days").innerHTML=state.map((d,i)=>`<div class="day${open.has(i)?" open":""}${i===TODAY?" today":""}">
@@ -721,33 +719,6 @@ function renderPack(){
 }
 function togglePack(id){packed[id]=!packed[id];savePacked();}
 
-
-/* ===== 경비 가계부 ===== */
-const EKEY="dl_exp_v1";
-const ECATS=[["식비","🍽"],["숙소","🏨"],["교통","🚕"],["입장·관광","🎫"],["쇼핑·기념품","🛍"],["기타","🧾"]];
-let exps=(()=>{try{return JSON.parse(localStorage.getItem(EKEY))||[];}catch(e){return[];}})();
-let ePayer="나",eType="공동",eid=exps.reduce((m,e)=>Math.max(m,e.id||0),0);
-document.getElementById("expCat").innerHTML=ECATS.map(c=>`<option value="${c[0]}">${c[1]} ${c[0]}</option>`).join("");
-function segInit(id,set){const seg=document.getElementById(id);seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");set(b.dataset.v);});}
-segInit("expPayer",v=>ePayer=v);segInit("expType",v=>eType=v);
-function saveExps(){try{localStorage.setItem(EKEY,JSON.stringify(exps));}catch(e){}}
-function catIcon(c){const f=ECATS.find(x=>x[0]===c);return f?f[1]:"🧾";}
-document.getElementById("expAdd").onclick=()=>{const el=document.getElementById("expAmt"),amt=parseFloat(el.value);if(!amt||amt<=0){el.focus();return;}exps.unshift({id:++eid,a:amt,c:document.getElementById("expCat").value,p:ePayer,t:eType,m:document.getElementById("expMemo").value.trim()});saveExps();el.value="";document.getElementById("expMemo").value="";renderExp();};
-function delExp(id){exps=exps.filter(e=>e.id!==id);saveExps();renderExp();}
-function renderExp(){
- const list=document.getElementById("expList"),sum=document.getElementById("expSummary");
- const total=exps.reduce((s,e)=>s+e.a,0);
- const shared=exps.filter(e=>e.t==="공동").reduce((s,e)=>s+e.a,0);
- const eunShared=exps.filter(e=>e.t==="공동"&&e.p==="나").reduce((s,e)=>s+e.a,0);
- const eunPaid=exps.filter(e=>e.p==="나").reduce((s,e)=>s+e.a,0),chaPaid=total-eunPaid;
- const bal=eunShared-shared/2;
- let settle="아직 정산할 공동지출이 없어요";
- if(Math.abs(bal)>=0.5)settle=bal>0?`<b>일행 → 나 ¥${Math.round(bal).toLocaleString()}</b> 주면 공동비용 5:5 정산 완료`:`<b>나 → 일행 ¥${Math.round(-bal).toLocaleString()}</b> 주면 공동비용 5:5 정산 완료`;
- sum.innerHTML=`<div class="exp-sum"><div class="es-top"><span class="es-tot">¥${total.toLocaleString(undefined,{maximumFractionDigits:0})}</span><span class="es-sub">₩${Math.round(total*(+rateEl.value||0)).toLocaleString("ko-KR")}</span></div><div class="es-sub">나 ¥${Math.round(eunPaid).toLocaleString()} · 일행 ¥${Math.round(chaPaid).toLocaleString()} 결제</div><div class="es-set">⚖️ ${settle}</div></div>`;
- if(!exps.length){list.innerHTML=`<div class="exp-empty">아직 입력한 지출이 없어요. 위에서 금액을 추가해보세요!</div>`;return;}
- list.innerHTML=exps.map(e=>`<div class="exprow"><span class="ex-c">${catIcon(e.c)}</span><span class="ex-b"><span class="ex-m">${esc(e.m||e.c)}</span> <span class="ex-meta">${e.p}·${e.t}</span></span><span class="ex-a">¥${e.a.toLocaleString(undefined,{maximumFractionDigits:2})}</span><button class="ex-del" onclick="delExp(${e.id})" aria-label="삭제">✕</button></div>`).join("");
-}
-renderExp();
 
 /* ===== 중국어 회화·메뉴 ===== */
 const PHRASES=[
