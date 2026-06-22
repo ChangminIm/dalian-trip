@@ -16,9 +16,9 @@
 
 
 <style>
-@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareR.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareB.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareEB.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareR.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0-33FF,U+A960-A97F,U+AC00-D7FF,U+FF00-FFEF}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareB.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;unicode-range:U+0-33FF,U+A960-A97F,U+AC00-D7FF,U+FF00-FFEF}
+@font-face{font-family:'NanumSquare';src:url('fonts/NanumSquareEB.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;unicode-range:U+0-33FF,U+A960-A97F,U+AC00-D7FF,U+FF00-FFEF}
 @font-face{font-family:'Noto Sans SC';src:url('fonts/NotoSansSC-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Noto Sans SC';src:url('fonts/NotoSansSC-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 :root{--ink:#1d2630;--muted:#6b7682;--paper:#FBFAF7;--azulejo:#16467F;--azulejo-2:#1E5DA8;
@@ -694,11 +694,11 @@ function buildDetail(it,info,sl){
  wiki.style.display="none";wiki.innerHTML="";
  photo.innerHTML=`<div class="phpat"></div><div class="dspin"></div>`;
  getWiki(sl,info.wk||it.w,info.kw).then(w=>{
-  if(location.hash!=="#p/"+sl)return;
+  if(decodeURIComponent(location.hash)!=="#p/"+sl)return;
   if(w&&w.thumb)photo.innerHTML=`<img src="${w.thumb}" alt="${esc(name)}">`+(w.url?`<a class="credit" target="_blank" rel="noopener" href="${w.url}">© 위키백과</a>`:"");
   else photoPlaceholder(photo);
   if(w&&w.extract){wiki.style.display="";wiki.innerHTML=esc(w.extract)+(w.url?`<a class="src" target="_blank" rel="noopener" href="${w.url}">위키백과에서 더 보기 ›</a>`:"");}
- }).catch(()=>{if(location.hash==="#p/"+sl)photoPlaceholder(photo);});
+ }).catch(()=>{if(decodeURIComponent(location.hash)==="#p/"+sl)photoPlaceholder(photo);});
 }
 function openDetail(sl){
  const it=PLACEIDX[sl],d=document.getElementById("detail");
