@@ -313,7 +313,7 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <div class="eyebrow">Dalian · 4 Days <span class="dday" id="dday"></span></div>
 <h1>2026 다롄 GIS 워크샵</h1>
 <div class="who">GIS 연구실 <span>🌊</span> 워크샵</div>
-<div class="meta"><span><b>2026.6.24(수) → 6.27(토)</b></span><span>중국 다롄 · 3박 4일</span><span>싱하이광장 아투어 호텔</span></div>
+<div class="meta"><span><b>2026.6.24(수) → 6.27(토)</b></span><span>중국 다롄 · 3박 4일</span><span>성해광장 아투어 호텔</span></div>
 <div class="clocks" id="clocks"></div>
 </div></header>
 <div class="wrap">
@@ -331,6 +331,8 @@ body.dark .btn.copy{background:#14241c;border-color:#27513a;color:#5fd6a0}
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>숙소<span class="sechev">▶</span></button><div class="sec-body"><div class="grid" id="hotels"></div></div></section>
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>📍 택시·길찾기 중국어 메모<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>📋 복사로 중국어 주소를 붙여넣거나 기사에게 보여주세요 · 📍 지도로 위치 확인</span></div>
 <div class="grid" id="fado" style="margin-top:8px"></div></div></section>
+<section class="sec"><button class="sec-toggle"><span class="tick"></span>✨ 더 가볼만한 다롄<span class="sechev">▶</span></button><div class="sec-body"><div class="legend"><span>고정 일정 외 추천 명소 · 시간 여유 있을 때 · 📋 복사 / 📍 구글 / 🗺 Amap</span></div>
+<div class="grid" id="spots" style="margin-top:8px"></div></div></section>
 <section class="sec open"><button class="sec-toggle"><span class="tick"></span>일정<span class="sechev">▶</span></button><div class="sec-body">
 <div class="legend">
 <span class="stars">★</span>추천도(필수=★5)
@@ -366,12 +368,12 @@ const flights=[
  {route:"인천 → 다롄 (ICN→DLC)",when:"6/24",sub:"중국남방항공 CZ686 · 11:25 → 11:40(현지) · 약 1시간 15분"},
  {route:"다롄 → 인천 (DLC→ICN)",when:"6/27",sub:"중국남방항공 CZ695 · 14:00 → 16:15 · 약 2시간 15분"}];
 const hotels=[
- {city:"다롄 (싱하이광장)",nights:"6/24–6/27 · 3박",name:"다롄 싱하이광장 아투어 호텔 · 大连星海广场博物馆亚朵酒店 (沙河口区星河路29号 · ☎0411-82193333)",status:"ok",g:"https://maps.app.goo.gl/PCanHSG225btsBjG8",a:"https://surl.amap.com/10FjqJ01dxr"}];
+ {city:"다롄 (성해광장)",nights:"6/24–6/27 · 3박",name:"다롄 성해광장 아투어 호텔 · 大连星海广场博物馆亚朵酒店 (沙河口区星河路29号 · ☎0411-82193333)",status:"ok",g:"https://maps.app.goo.gl/PCanHSG225btsBjG8",a:"https://surl.amap.com/10FjqJ01dxr"}];
 // 택시·길찾기용 중국어 장소 메모 (이름에 중국어 병기 → 기사에게 보여주기 / 📍는 지도)
 const fado=[
  {name:"🏨 호텔 · 大连星海广场博物馆亚朵酒店",meta:"沙河口区星河路29号 · ☎ 0411-82193333",m:"Atour Hotel Xinghai Square Dalian",zh:"大连星海广场博物馆亚朵酒店",g:"https://maps.app.goo.gl/PCanHSG225btsBjG8",a:"https://surl.amap.com/10FjqJ01dxr",b:null},
  {name:"✈️ 공항 · 大连周水子国际机场",meta:"디디택시는 网约车(E-Hailing) 표지판 따라 · 일반 Taxi 아님 주의",m:"Dalian Zhoushuizi International Airport",zh:"大连周水子国际机场",b:null},
- {name:"🌃 성해광장 · 星海广场",meta:"싱하이광장 · 아시아 최대 광장, 야경 명소",m:"Xinghai Square Dalian",zh:"星海广场",b:null},
+ {name:"🌃 성해광장 · 星海广场",meta:"성해광장 · 아시아 최대 광장, 야경 명소",m:"Xinghai Square Dalian",zh:"星海广场",b:null},
  {name:"🚠 케이블카 입구 · 大连森林动物园广场",meta:"다롄삼림동물원 광장(동물원 관람 X → 케이블카 승강장)",m:"Dalian Forest Zoo",zh:"大连森林动物园广场",b:null},
  {name:"⚓ 어인부두 · 渔人码头",meta:"유럽풍 부두·카페거리",m:"Fisherman's Wharf Dalian",zh:"渔人码头",b:null},
  {name:"🏮 동관가 · 东关街历史文化街区",meta:"역사문화거리(대련의 성수동)",m:"Dongguan Street Dalian",zh:"东关街历史文化街区",b:null},
@@ -385,7 +387,7 @@ const DAYS=[
   {t:"13:30",name:"짐 풀기 · 점심 (성해광장 근처)",s:3,desc:"체크인 후 성해광장 주변에서 점심식사",m:"Xinghai Square Dalian",n:"성해광장 맛집"},
   {t:"16:00",name:"연화산 전망대 케이블카 🚠",s:5,desc:"디디로 다롄삼림동물원(大连森林动物园广场) 이동(약 10분) → 동물원 관람 X, 케이블카 승강장으로. 케이블카 타고 연화산 전망대에서 다롄 시내 조망",tip:"편도 60元 + 전망대 타워 20元 · 운영 ~19:30",m:"Lianhua Mountain Dalian",n:"다롄 연화산 케이블카"},
   {t:"19:00",name:"성해광장 저녁식사",s:3,desc:"성해광장으로 돌아와 저녁식사",m:"Xinghai Square Dalian",n:"성해광장 저녁"},
-  {t:"20:00",name:"싱하이광장 야경 🌃",s:4,desc:"아시아 최대 광장의 야경 감상 후 호텔 복귀",m:"Xinghai Square Dalian",n:"다롄 성해광장 야경"}]},
+  {t:"20:00",name:"성해광장 야경 🌃",s:4,desc:"아시아 최대 광장의 야경 감상 후 호텔 복귀",m:"Xinghai Square Dalian",n:"다롄 성해광장 야경"}]},
  {date:"6/25",dow:"목",title:"어인부두 · 서안로 야시장",wake:"08:30",items:[
   {t:"09:30",name:"아침식사 후 출발",desc:"호텔 조식 또는 근처에서 아침"},
   {t:"09:30",name:"호텔 → 어인부두 (디디 약 23분)",desc:"DiDi로 어인부두(渔人码头) 이동",m:"Fisherman's Wharf Dalian",n:"다롄 어인부두"},
@@ -411,7 +413,7 @@ const FOODS={
  {name:"톈톈위강 (天天渔港·성해광장점)",desc:"다롄 대표 해산물 레스토랑 체인. 수족관에서 직접 고른 신선한 해산물을 즉석 조리해줘요.",m:"Tian Tian Yu Gang Xinghai Square Dalian",w:"Chinese seafood",n:"다롄 톈톈위강 해산물"},
  {name:"다롄 해산물 (大连海鲜)",desc:"다롄은 발해·황해를 낀 항구도시라 조개·전복·해삼·새우가 저렴하고 싱싱해요. 해물찜·구이 강추.",m:"seafood restaurant Xinghai Square Dalian",w:"Seafood",n:"다롄 해산물 맛집"},
  {name:"멘즈 (焖子)",desc:"고구마 전분묵을 철판에 지져 참깨·마늘 소스에 비벼 먹는 다롄 명물 길거리 음식.",m:"Dalian Menzi food",n:"다롄 멘즈 焖子"},
- {name:"싱하이광장 카페거리",desc:"광장 주변 바다 전망 카페·디저트. 야경 보기 전 쉬어가기 좋아요.",m:"cafe Xinghai Square Dalian",n:"다롄 성해광장 카페"},
+ {name:"성해광장 카페거리",desc:"광장 주변 바다 전망 카페·디저트. 야경 보기 전 쉬어가기 좋아요.",m:"cafe Xinghai Square Dalian",n:"다롄 성해광장 카페"},
  ],
 "6/25":[
  {name:"어인부두 해산물 (渔人码头 海鲜)",desc:"부두 전망 레스토랑에서 즐기는 신선한 다롄 해산물. 유럽풍 거리의 카페·디저트도 인기.",m:"seafood restaurant Fisherman's Wharf Dalian",n:"다롄 어인부두 해산물"},
@@ -505,7 +507,17 @@ const STORY={
 const starHtml=s=>s?`<div class="stars">${"★".repeat(s)}<span class="se">${"★".repeat(5-s)}</span></div>`:"";
 document.getElementById("flights").innerHTML=flights.map(f=>`<div class="info"><div class="top"><span class="route">${f.route}</span><span class="when">${f.when}</span></div><div class="sub">${f.sub}</div></div>`).join("");
 document.getElementById("hotels").innerHTML=hotels.map(h=>`<div class="info"><div class="top"><span class="route">${h.city} <span class="pill ${h.status}">${h.status==="ok"?"예약완료":"미예약"}</span></span><span class="when">${h.nights}</span></div><div class="sub">${h.name}</div><div class="acts">${h.g?`<a class="btn map" target="_blank" rel="noopener" href="${h.g}">📍 구글맵</a>`:""}${h.a?`<a class="btn amap" target="_blank" rel="noopener" href="${h.a}">🗺 Amap</a>`:""}${h.b?`<a class="btn book" target="_blank" rel="noopener" href="${bookUrl(h.b)}">🔗 예약</a>`:""}</div></div>`).join("");
+const SPOTS=[
+ {name:"뤼순 감옥 박물관",zh:"旅顺日俄监狱旧址博物馆",meta:"러·일이 운영한 근대 감옥 유적. 안중근 의사가 순국하신 곳으로 한국인에게 뜻깊은 역사 현장 · 시내에서 차로 약 1시간",m:"Lushun Prison Museum Dalian"},
+ {name:"203고지 (얼링산)",zh:"203高地",meta:"러일전쟁 최대 격전지. 정상에서 뤼순 군항·시내 조망 · 뤼순",m:"203 Hill Lushun Dalian"},
+ {name:"뤼순 군항 · 백옥산",zh:"白玉山",meta:"천혜의 군항과 백옥산 전망탑에서 보는 항구 파노라마 · 뤼순",m:"Baiyu Mountain Lushun Dalian"},
+ {name:"금석탄 국가지질공원",zh:"金石滩国家地质公园",meta:"수억 년 침식 해안 기암괴석 + 디스커버리킹덤 테마파크 · 전철/차로 약 1시간",m:"Jinshitan National Geopark Dalian"},
+ {name:"라오후탄 해양공원",zh:"老虎滩海洋公园",meta:"해안가 대형 해양 테마파크·수족관(극지관·산호관). 가족·커플 인기 · 시내",m:"Laohutan Ocean Park Dalian"},
+ {name:"러시아 거리",zh:"俄罗斯风情街",meta:"제정 러시아 시절 건물이 남은 이국적 거리. 기념품·사진 명소 · 다롄역 인근",m:"Russian Street Dalian"},
+ {name:"다롄 자연사박물관",zh:"大连自然博物馆",meta:"대형 고래 골격·해양 생물 전시. 성해광장 인근이라 일정에 끼우기 좋아요",m:"Dalian Natural History Museum"},
+ {name:"헤이스자오 해안",zh:"黑石礁",meta:"검은 카르스트 암반 해안 산책로. 성해광장에서 가까움 · 시내",m:"Heishijiao coast Dalian"}];
 document.getElementById("fado").innerHTML=fado.map(f=>`<div class="fcard"><div class="fn"><a class="pname" href="#p/${slug(f.m)}">${f.name}</a></div><div class="fm">${f.meta}</div><div class="acts">${f.zh?`<button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 복사</button>`:""}<a class="btn map" target="_blank" rel="noopener" href="${f.g||mapUrl(f.m)}">📍 구글</a><a class="btn amap" target="_blank" rel="noopener" href="${f.a||amapUrl(f.zh)}">🗺 Amap</a></div></div>`).join("");
+document.getElementById("spots").innerHTML=SPOTS.map(f=>`<div class="fcard"><div class="fn">${f.name} <span style="color:var(--muted);font-weight:400;font-size:12px">${f.zh}</span></div><div class="fm">${f.meta}</div><div class="acts"><button class="btn copy" onclick="copyZh(this,'${f.zh}')">📋 복사</button><a class="btn map" target="_blank" rel="noopener" href="${mapUrl(f.m)}">📍 구글</a><a class="btn amap" target="_blank" rel="noopener" href="${amapUrl(f.zh)}">🗺 Amap</a></div></div>`).join("");
 function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function render(){
  document.getElementById("days").innerHTML=state.map((d,i)=>`<div class="day${open.has(i)?" open":""}${i===TODAY?" today":""}">
