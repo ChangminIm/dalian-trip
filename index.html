@@ -422,20 +422,20 @@ const FOODS={
  {name:"톈톈위강 (天天渔港·성해광장점)",desc:"다롄 대표 해산물 레스토랑 체인. 수족관에서 직접 고른 신선한 해산물을 즉석 조리해줘요.",m:"Tian Tian Yu Gang Dalian",w:"Seafood",n:"다롄 톈톈위강 해산물"},
  {name:"다롄 해산물 (大连海鲜)",desc:"발해·황해를 낀 항구도시라 조개·전복·해삼·새우가 저렴하고 싱싱해요. 해물찜·구이 강추.",m:"Dalian seafood",w:"Seafood",n:"다롄 해산물 맛집"},
  {name:"멘즈 (焖子)",desc:"고구마 전분묵을 철판에 지져 참깨·마늘 소스에 비벼 먹는 다롄 명물 길거리 음식.",m:"Dalian Menzi food",w:"Liangfen",n:"다롄 멘즈 焖子"},
- {name:"성해광장 카페거리",desc:"광장 주변 바다 전망 카페·디저트. 야경 보기 전 쉬어가기 좋아요.",m:"cafe Xinghai Square Dalian",w:"Coffeehouse",n:"다롄 성해광장 카페"}],
+ {name:"성해광장 카페거리",desc:"광장 주변 바다 전망 카페·디저트. 야경 보기 전 쉬어가기 좋아요.",m:"cafe Xinghai Square Dalian",w:"Xinghai Square",n:"다롄 성해광장 카페"}],
 "6/25":[
  {name:"어인부두 해산물 (渔人码头 海鲜)",desc:"부두 전망 레스토랑에서 즐기는 신선한 다롄 해산물. 유럽풍 거리의 카페·디저트도 인기.",m:"Fisherman Wharf Dalian seafood",w:"Seafood",n:"다롄 어인부두 해산물"},
  {name:"카오렁몐 (烤冷面)",desc:"철판에 구운 냉면을 소스·계란과 말아주는 동북식 길거리 간식.",m:"Kao Leng Mian street food",w:"Chinese noodles",n:"카오렁몐 烤冷面"},
  {name:"서안로 야시장 먹거리 (西安路夜市)",desc:"양꼬치·철판오징어·해산물구이·탕후루 등 다롄 야시장 길거리 음식 총집합.",m:"Xian Road night market Dalian",w:"Night market",n:"다롄 서안로 야시장 먹거리"},
  {name:"양꼬치 (羊肉串)",desc:"중국 동북 지방의 대표 길거리 안주. 맥주(피지우)와 함께 즐겨요.",m:"lamb skewers China",w:"Chuan (food)",n:"다롄 양꼬치"}],
 "6/26":[
- {name:"동관가 거리 먹거리 (东关街 小吃)",desc:"역사문화거리 곳곳의 디저트·간식. 사진 찍으며 군것질하기 좋아요.",m:"Dongguan Street food Dalian",w:"Street food",n:"다롄 동관가 먹거리"},
+ {name:"동관가 거리 먹거리 (东关街 小吃)",desc:"역사문화거리 곳곳의 디저트·간식. 사진 찍으며 군것질하기 좋아요.",m:"Dongguan Street food Dalian",w:"Tanghulu",n:"다롄 동관가 먹거리"},
  {name:"양자댜오루빙 (杨家吊炉饼)",desc:"화덕에 구운 다롄식 전통 빵. 현지인이 사랑하는 노포 맛.",m:"Dalian diaolu bing",w:"Shaobing",n:"다롄 양자댜오루빙"},
  {name:"동북식 물만두·교자 (喜家德 등)",desc:"두툼한 동북식 물만두·교자 전문점. 든든한 한 끼로 좋아요.",m:"Northeast China dumplings",w:"Jiaozi",n:"다롄 만두 맛집"},
- {name:"갤러리아 백화점 (동방수성)",desc:"동방수성 인근 백화점 식당가에서 깔끔하게 저녁 해결 가능.",m:"Galleria department store Dalian",w:"Food court",n:"동방수성 갤러리아 백화점"}],
+ {name:"갤러리아 백화점 (동방수성)",desc:"동방수성 인근 백화점 식당가에서 깔끔하게 저녁 해결 가능.",m:"Galleria department store Dalian",w:"Dalian",n:"동방수성 갤러리아 백화점"}],
 "6/27":[
- {name:"성해광장 카페 (출발 전)",desc:"체크아웃 후 바다 전망 카페에서 여유롭게. 다롄 빵집·디저트도 추천.",m:"cafe Xinghai Square Dalian",w:"Coffeehouse",n:"다롄 성해광장 카페"},
- {name:"다롄 공항 식당가 (大连周水子机场)",desc:"탑승 전 간단히 한 끼. 출국 전 마지막 식사.",m:"Dalian airport restaurant",w:"Food court",n:"다롄 공항 식당"}]
+ {name:"성해광장 카페 (출발 전)",desc:"체크아웃 후 바다 전망 카페에서 여유롭게. 다롄 빵집·디저트도 추천.",m:"cafe Xinghai Square Dalian",w:"Xinghai Square",n:"다롄 성해광장 카페"},
+ {name:"다롄 공항 식당가 (大连周水子机场)",desc:"탑승 전 간단히 한 끼. 출국 전 마지막 식사.",m:"Dalian airport restaurant",w:"Dalian Zhoushuizi International Airport",n:"다롄 공항 식당"}]
 };
 // 날짜별 추천 1일 투어/패키지 — q:영문검색(GYG/Viator/Klook), kq:한국어(마이리얼트립)
 const TOURS={
@@ -499,15 +499,15 @@ const slug=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[
 // 장소 설명: m(지도검색어) 그대로 key. ko=한국어 설명, wk=위키백과 영문 제목(사진·추가설명)
 const PLACE_INFO={
 "Dalian Zhoushuizi International Airport":{wk:"Dalian Zhoushuizi International Airport",ko:"다롄 도심에서 가까운 국제공항. 택시(디디)는 '网约车(E-Hailing)' 표지판을 따라가야 하고, 일반 'Taxi' 승강장과 다르니 주의하세요."},
-"Atour Hotel Xinghai Square Dalian":{ko:"성해광장 인근의 아투어(亚朵) 호텔. 주소 大连市沙河口区星河路29号, ☎ 0411-82193333. 디디 호출 시 이 중국어 이름을 보여주면 편해요."},
+"Atour Hotel Xinghai Square Dalian":{wk:"Xinghai Square",ko:"성해광장 인근의 아투어(亚朵) 호텔. 주소 大连市沙河口区星河路29号, ☎ 0411-82193333. 디디 호출 시 이 중국어 이름을 보여주면 편해요."},
 "Xinghai Square Dalian":{wk:"Xinghai Square",ko:"아시아 최대 규모의 도시 광장. 1997년 홍콩 반환·다롄 개항 100주년을 기념해 바다를 메워 만들었어요. 바닷가 산책로와 야경이 특히 예뻐요."},
-"Lianhua Mountain Dalian":{ko:"케이블카로 오르는 다롄 시내 전망대. 도심과 바다를 한눈에 내려다볼 수 있어요. 케이블카 편도 60元 + 전망대 타워 20元."},
-"Dalian Forest Zoo":{wk:"Dalian Forest Zoo",ko:"연화산 케이블카 승강장이 있는 곳. 동물원 자체는 패스하고 광장(大连森林动物园广场)에서 케이블카 승강장으로 이동해요."},
-"Fisherman's Wharf Dalian":{ko:"바닷가를 따라 알록달록한 유럽풍 건축물이 늘어선 부두. 레스토랑·카페가 많아 산책과 사진 촬영 명소예요."},
-"Xi'an Road Dalian":{ko:"다롄 최대 번화가 중 하나인 서안로. 长兴里小吃街 야시장에서 양꼬치·해산물구이·카오렁몐 등 길거리 먹거리를 즐길 수 있어요."},
-"Dongguan Street Dalian":{ko:"최근 정비된 역사문화거리로 '대련의 성수동'이라 불려요. 옛 건물 사이로 상점·카페·기념품 가게·포토존이 가득해요."},
-"Eastern Venice Water City Dalian":{ko:"운하를 따라 유럽풍 건물을 세운 수상 테마 거리(东方水城). 다리와 물길을 배경으로 사진 찍기 좋고 인근 백화점에서 식사도 가능해요."},
-"Minzhu Square Dalian":{ko:"동방수성으로 가는 길에 거치는 광장. 여기서 13번 버스나 택시로 갈아타면 돼요."}
+"Lianhua Mountain Dalian":{wk:"Dalian",ko:"케이블카로 오르는 다롄 시내 전망대. 도심과 바다를 한눈에 내려다볼 수 있어요. 케이블카 편도 60元 + 전망대 타워 20元."},
+"Dalian Forest Zoo":{wk:"Dalian",ko:"연화산 케이블카 승강장이 있는 곳. 동물원 자체는 패스하고 광장(大连森林动物园广场)에서 케이블카 승강장으로 이동해요."},
+"Fisherman's Wharf Dalian":{wk:"Dalian Bay",ko:"바닷가를 따라 알록달록한 유럽풍 건축물이 늘어선 부두. 레스토랑·카페가 많아 산책과 사진 촬영 명소예요."},
+"Xi'an Road Dalian":{wk:"Night market",ko:"다롄 최대 번화가 중 하나인 서안로. 长兴里小吃街 야시장에서 양꼬치·해산물구이·카오렁몐 등 길거리 먹거리를 즐길 수 있어요."},
+"Dongguan Street Dalian":{wk:"Zhongshan Square",ko:"최근 정비된 역사문화거리로 '대련의 성수동'이라 불려요. 옛 건물 사이로 상점·카페·기념품 가게·포토존이 가득해요."},
+"Eastern Venice Water City Dalian":{wk:"Dalian",ko:"운하를 따라 유럽풍 건물을 세운 수상 테마 거리(东方水城). 다리와 물길을 배경으로 사진 찍기 좋고 인근 백화점에서 식사도 가능해요."},
+"Minzhu Square Dalian":{wk:"Dalian",ko:"동방수성으로 가는 길에 거치는 광장. 여기서 13번 버스나 택시로 갈아타면 돼요."}
 };
 // 지역별 재미있는 이야기·지리 이야기 (상세 페이지 표시) — key는 m
 const STORY={
@@ -670,14 +670,6 @@ async function getWiki(key,enTitle,koTitle){
   if(koTitle){
    const r=await fetch("https://ko.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(koTitle.replace(/ /g,"_")));
    if(r.ok){const k=await r.json();if(k.type==="standard"){if(k.extract)extract=k.extract;url=((k.content_urls||{}).desktop||{}).page||null;if(k.thumbnail&&k.thumbnail.source)thumb=k.thumbnail.source;}}
-  }
-  // 3) 사진이 없으면 위키미디어 공용 이미지 검색(식당·시장 등도 바로 사진)
-  if(!thumb){
-   const q=enTitle||koTitle||key.replace(/-/g," ");
-   const cu="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)+"&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=720&format=json&origin=*";
-   const cj=await(await fetch(cu)).json();
-   const cp=cj&&cj.query&&cj.query.pages?Object.values(cj.query.pages):[];
-   if(cp[0]&&cp[0].imageinfo&&cp[0].imageinfo[0])thumb=cp[0].imageinfo[0].thumburl;
   }
   const data=(thumb||extract)?{thumb,extract,url}:null;
   c[key]=data;saveWiki(c);
